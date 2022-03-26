@@ -7,10 +7,15 @@ public class GameController : MonoBehaviour
 {
     public static GameController instance;
     public GameState state;
+    public GameObject[] panels;
+    [SerializeField] Text StaminaData;
+    public int currentStamina;
 
     public Transform[] spawnlevel; //Permette di far spawnare il palyer nello spawn di inzio livello
 
     [SerializeField] GameObject player;
+    [SerializeField] GameObject gauntlet;
+    [SerializeField] GameObject gauntlet2;
 
     public void Awake()
     {
@@ -21,6 +26,13 @@ public class GameController : MonoBehaviour
     void Start()
     {
         state = GameState.play;
+
+        foreach (GameObject panel in panels)
+        {
+            panel.SetActive(false);
+        }
+        panels[2].SetActive(true);
+
         initLevel(PlayerController.playercon.idlevel);
     }
 
@@ -34,6 +46,12 @@ public class GameController : MonoBehaviour
     {
         //ActiveLevel(id);
         player.transform.position = spawnlevel[id].position;
+    }
+
+    public void heal()
+    {
+        currentStamina = 100;
+        StaminaData.text = currentStamina.ToString();
     }
 
     //Metodo dedicato allo stato di IDLE
@@ -59,6 +77,21 @@ public class GameController : MonoBehaviour
     {
         print("Sono in Pause");
     }
+    public void _TAKE()
+    {
+        print("Sono in Take");
+
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            Destroy(gauntlet.gameObject);
+            gauntlet2.SetActive(true);
+            //PlayerController.playercon.take = false;
+            panels[0].SetActive(false);
+            panels[1].SetActive(true);
+
+            state = GameState.play;
+        }
+    }
 
     void StateMachine()
     {
@@ -75,6 +108,9 @@ public class GameController : MonoBehaviour
                 break;
             case GameState.pause:
                 _PAUSE();
+                break;
+            case GameState.take:
+                _TAKE();
                 break;
         }
     }
