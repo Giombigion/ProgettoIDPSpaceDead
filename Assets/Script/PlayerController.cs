@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     float asseZ;
     float asseX;
     float rotX = 90;
+    public bool take = false;
+
 
     //Varibili per il raycast.
     public Transform raypoint;
@@ -44,7 +46,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         //Se il componente GameMaster è settato sullo stato di Play, allora esegui il contenuto.
-        if (GameController.instance.state == GameState.play)
+        if (GameController.instance.state == GameState.play || GameController.instance.state == GameState.take)
         {
             isGround = Physics.CheckSphere(raypoint.position, groundDistance, layer);
             Jump = Input.GetButtonDown("Jump");
@@ -82,6 +84,25 @@ public class PlayerController : MonoBehaviour
 
             velocity.y += gravity * Time.deltaTime;
             controller.Move(velocity * Time.deltaTime);
+        }
+    }
+
+    private void OnCollisionEnter(Collision hit)
+    {
+
+        print(hit.gameObject.tag);
+
+        if (hit.gameObject.tag == "Gauntlet" && take == false)
+        {
+            GameController.instance.panels[0].SetActive(true);
+            GameController.instance.state = GameState.take;
+            take = true;
+        }
+        if (hit.gameObject.tag == "Medikit")
+        {
+            Destroy(hit.gameObject);
+            print("Yor Health was maxed out");
+            GameController.instance.heal();
         }
     }
 

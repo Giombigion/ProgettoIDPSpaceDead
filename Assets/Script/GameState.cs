@@ -4,5 +4,6 @@ public enum GameState
     idle,
     play,
     dead,
-    pause
+    pause,
+    take
 }
