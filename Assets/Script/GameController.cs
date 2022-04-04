@@ -11,6 +11,8 @@ public class GameController : MonoBehaviour
     [SerializeField] Text StaminaData;
     public int currentStamina;
 
+    [SerializeField] bool isMouseShowed;
+
     public Transform[] spawnlevel; //Permette di far spawnare il palyer nello spawn di inzio livello
 
     [SerializeField] GameObject player;
@@ -25,6 +27,8 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        hidemouse();
+
         state = GameState.play;
 
         foreach (GameObject panel in panels)
@@ -90,6 +94,20 @@ public class GameController : MonoBehaviour
             panels[1].SetActive(true);
 
             state = GameState.play;
+        }
+    }
+
+    void hidemouse()
+    {
+        if (isMouseShowed)
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        else
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
         }
     }
 
