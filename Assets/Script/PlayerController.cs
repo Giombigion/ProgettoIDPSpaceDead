@@ -100,12 +100,24 @@ public class PlayerController : MonoBehaviour
             GameController.instance.state = GameState.take;
             take = true;
         }
+
+    }
+    private void OnTriggerEnter(Collider hit)
+    {
+
         if (hit.gameObject.tag == "Medikit")
         {
             Destroy(hit.gameObject);
-            print("Yor Health was maxed out");
+            print("Your Health was maxed out");
             GameController.instance.heal();
         }
+        if (hit.gameObject.tag == "Ammo")
+        {
+            Destroy(hit.gameObject);
+            print("You gained 1 ammo");
+            GameController.instance.ammoUp();
+        }
+
     }
 
 }
