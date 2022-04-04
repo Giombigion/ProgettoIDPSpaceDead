@@ -65,8 +65,8 @@ public class PlayerController : MonoBehaviour
                 velocity.y = -2f;
             }
 
-            asseX = Input.GetAxis("Horizontal");
-            rotX += asseX;
+            asseX = Input.GetAxis("Horizontal") * Time.deltaTime;
+            //rotX += asseX;
             asseZ = Input.GetAxis("Vertical");
 
             Vector3 movements = new Vector3(asseX, 0, asseZ);
@@ -80,7 +80,7 @@ public class PlayerController : MonoBehaviour
 
           
             controller.Move(transform.forward * asseZ * speed * Time.deltaTime);
-            transform.rotation = Quaternion.Euler(0, rotX * rotSpeed, 0);
+            //transform.rotation = Quaternion.Euler(0, rotX * rotSpeed , 0);
 
             velocity.y += gravity * Time.deltaTime;
             controller.Move(velocity * Time.deltaTime);
