@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 
     //Variabili per il movimento
     public float speed = 12f; //Imposto la forza con cui il Players si muove orizontalmente.
+    public float speedStrafe = 12;
     public float gravity = -9.81f; //Imposto una forza che da una spinta verso il basso al Player, simulando la gravità.
     public float jumpHeight = 3f; //Imposto la forza che da una spinta verso l'alto al Player.
     public float rotSpeed; //imposto la forza con cui il Player ruota sul suo asse.
@@ -65,7 +66,7 @@ public class PlayerController : MonoBehaviour
                 velocity.y = -2f;
             }
 
-            asseX = Input.GetAxis("Horizontal") * Time.deltaTime;
+            asseX = Input.GetAxis("Horizontal");
             //rotX += asseX;
             asseZ = Input.GetAxis("Vertical");
 
@@ -75,11 +76,11 @@ public class PlayerController : MonoBehaviour
             float animSpeedY = Vector3.Dot(movements, controller.transform.forward);
 
             //animator con BLEND TREE
-           //anim.SetFloat("ypose", animSpeedY, 0.2f, Time.deltaTime);
-           //anim.SetFloat("xpose", animSpeedX, 0.2f, Time.deltaTime);
+            //anim.SetFloat("ypose", animSpeedY, 0.2f, Time.deltaTime);
+            //anim.SetFloat("xpose", animSpeedX, 0.2f, Time.deltaTime);
 
-          
-            controller.Move(transform.forward * asseZ * speed * Time.deltaTime);
+            Vector3 moveplayer = transform.forward * movements.z * speed + Vector3.right * movements.x * speedStrafe;
+            controller.Move(moveplayer*Time.deltaTime);
             //transform.rotation = Quaternion.Euler(0, rotX * rotSpeed , 0);
 
             velocity.y += gravity * Time.deltaTime;
