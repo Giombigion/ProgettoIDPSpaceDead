@@ -21,6 +21,9 @@ public class BasicAlien : MonoBehaviour
     [SerializeField] LayerMask layer;
     [SerializeField] float lengthray;
     [SerializeField] bool isHuman;
+
+    float timer;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,8 +37,9 @@ public class BasicAlien : MonoBehaviour
     {
         if (GameController.instance.state == GameState.play)
         {
-            animazione.SetBool("isWalking", true);
+            //animazione.SetBool("isWalking", true);
 
+ 
             //Spheracast per il controllo della distanza tra il nemico e i vari oggetti
             RaycastHit hit;
             if (Physics.SphereCast(raypoint.position, 1, transform.forward, out hit, 5))
@@ -70,6 +74,9 @@ public class BasicAlien : MonoBehaviour
                 Patrol();
             }
 
+            var changeAnim = Vector3.Dot(agent.velocity, agent.transform.forward);
+            animazione.SetFloat("Blend", changeAnim,0.2f,Time.deltaTime);
+
         }
     }
     void OnDrawGizmos()
@@ -81,7 +88,8 @@ public class BasicAlien : MonoBehaviour
 
     void Patrol()
     {
-        animazione.SetBool("isAttacking", false);
+        //animazione.SetBool("isAttacking", false);
+       // animazione.SetFloat("Blend", 0.5f);
 
         Transform EnemyPaths = Paths[IDPaths].transform.GetChild(contatorewaypoints);
         distanzaWP = Vector3.Distance(transform.position, EnemyPaths.position);
@@ -89,10 +97,17 @@ public class BasicAlien : MonoBehaviour
 
         if (distanzaWP < 2)
         {
-            contatorewaypoints += 1;
-            if (contatorewaypoints >= Paths[IDPaths].childCount)
+            timer += Time.deltaTime;
+            if (timer > EnemyPaths.GetComponent<WaypointScript>().waitState)
             {
-                contatorewaypoints = 0;
+                timer = 0;
+                agent.speed = EnemyPaths.GetComponent<WaypointScript>().speedNode;
+
+                contatorewaypoints += 1;
+                if (contatorewaypoints >= Paths[IDPaths].childCount)
+                {
+                    contatorewaypoints = 0;
+                }
             }
         }
         agent.SetDestination(EnemyPaths.position);
@@ -102,6 +117,6 @@ public class BasicAlien : MonoBehaviour
     void Attack()
     {
         agent.SetDestination(target.position);
-        animazione.SetBool("isAttacking", true);
+        //animazione.SetBool("isAttacking", true);
     }
 }
