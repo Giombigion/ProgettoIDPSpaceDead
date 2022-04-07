@@ -95,6 +95,15 @@ public class GameController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.X))
         {
             Destroy(gauntlet.gameObject);
+
+
+            //Disabilita il collider 
+            //gauntlet2.GetComponent<BoxCollider>().enabled = false;
+
+            //Distrugge il collider;
+            Destroy(gauntlet2.GetComponent<BoxCollider>());
+
+
             gauntlet2.SetActive(true);
             //PlayerController.playercon.take = false;
             panels[0].SetActive(false);
