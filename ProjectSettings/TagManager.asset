@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Gauntlet
   - Medikit
+  - Ammo
   layers:
   - Default
   - TransparentFX

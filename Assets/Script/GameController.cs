@@ -10,6 +10,8 @@ public class GameController : MonoBehaviour
     public GameObject[] panels;
     [SerializeField] Text StaminaData;
     public int currentStamina;
+    [SerializeField] Text AmmoData;
+    public int currentAmmo = 1;
 
     [SerializeField] bool isMouseShowed;
 
@@ -56,6 +58,11 @@ public class GameController : MonoBehaviour
     {
         currentStamina = 100;
         StaminaData.text = currentStamina.ToString();
+    }
+    public void ammoUp()
+    {
+        currentAmmo += 1;
+        AmmoData.text = currentAmmo.ToString();
     }
 
     //Metodo dedicato allo stato di IDLE
