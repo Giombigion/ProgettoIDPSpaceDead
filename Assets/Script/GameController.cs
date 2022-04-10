@@ -16,6 +16,7 @@ public class GameController : MonoBehaviour
     [SerializeField] bool isMouseShowed;
 
     public Transform[] startspawnlevels; //Permette di far spawnare il palyer nello spawn di inzio livello
+    public Transform[] checkPoints;  //Array per i checkpoint 
 
     [SerializeField] GameObject player;
     [SerializeField] GameObject gauntlet;

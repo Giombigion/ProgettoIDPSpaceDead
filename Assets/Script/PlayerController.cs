@@ -30,6 +30,8 @@ public class PlayerController : MonoBehaviour
     public static PlayerController playercon;
 
     [SerializeField] public int idlevel; //Variabile per l'assegnazione di un valore ad ogni livello
+    [SerializeField] int checkcounter; //Variabile per il controllo dei chekpoints
+
 
     public void Awake()
     {
@@ -123,6 +125,15 @@ public class PlayerController : MonoBehaviour
             GameController.instance.initLevel(idlevel + 1);
         }
 
+        //Codice per i check points
+        if (hit.gameObject.tag == "CheckPoint")
+        {
+            checkcounter += 1;
+            print(checkcounter);
+            GameController.instance.startspawnlevels[0].position = GameController.instance.checkPoints[checkcounter].position;
+            hit.gameObject.GetComponent<BoxCollider>().enabled = false;
+            Destroy(hit.gameObject);
+        }
     }
 
 }
