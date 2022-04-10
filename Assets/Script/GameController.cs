@@ -15,7 +15,7 @@ public class GameController : MonoBehaviour
 
     [SerializeField] bool isMouseShowed;
 
-    public Transform[] spawnlevel; //Permette di far spawnare il palyer nello spawn di inzio livello
+    public Transform[] startspawnlevels; //Permette di far spawnare il palyer nello spawn di inzio livello
 
     [SerializeField] GameObject player;
     [SerializeField] GameObject gauntlet;
@@ -48,10 +48,10 @@ public class GameController : MonoBehaviour
         StateMachine();
     }
 
-    void initLevel(int id)
+    public void initLevel(int id)
     {
         //ActiveLevel(id);
-        player.transform.position = spawnlevel[id].position;
+        PlayerController.playercon.transform.position = startspawnlevels[id].position;
     }
 
     public void heal()

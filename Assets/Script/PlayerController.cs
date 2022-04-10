@@ -19,7 +19,6 @@ public class PlayerController : MonoBehaviour
     float rotX = 90;
     public bool take = false;
 
-
     //Varibili per il raycast.
     public Transform raypoint;
     bool Jump; //Variabile bool per il salto = variabile vera o falsa.
@@ -116,6 +115,12 @@ public class PlayerController : MonoBehaviour
             Destroy(hit.gameObject);
             print("You gained 1 ammo");
             GameController.instance.ammoUp();
+        }
+
+        //Codice per il teletrasporto a fine livello
+        if (hit.gameObject.tag == "EndLevel")
+        {
+            GameController.instance.initLevel(idlevel + 1);
         }
 
     }
