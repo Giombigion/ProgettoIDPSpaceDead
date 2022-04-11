@@ -71,7 +71,7 @@ public class BasicAlien : MonoBehaviour
             else
             {
                 print("non ti vedo");
-                //Patrol();
+                Patrol();
             }
 
             var changeAnim = Vector3.Dot(agent.velocity, agent.transform.forward);
@@ -86,10 +86,10 @@ public class BasicAlien : MonoBehaviour
         Gizmos.DrawWireSphere(raypoint.position, 5);
     }
 
-    /*void Patrol()
+    void Patrol()
     {
         //animazione.SetBool("isAttacking", false);
-       // animazione.SetFloat("Blend", 0.5f);
+        //animazione.SetFloat("Blend", 0.5f);
 
         Transform EnemyPaths = Paths[IDPaths].transform.GetChild(contatorewaypoints);
         distanzaWP = Vector3.Distance(transform.position, EnemyPaths.position);
@@ -113,10 +113,11 @@ public class BasicAlien : MonoBehaviour
         agent.SetDestination(EnemyPaths.position);
 
     }
-    */
+    
     void Attack()
     {
+        animazione.SetFloat("Blend", 1f);
         agent.SetDestination(target.position);
-        //animazione.SetBool("isAttacking", true);
+        
     }
 }
