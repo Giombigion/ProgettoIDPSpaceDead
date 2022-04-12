@@ -8,8 +8,15 @@ public class GameController : MonoBehaviour
     public static GameController instance;
     public GameState state;
     public GameObject[] panels;
+
+    //Variabile per la gestione dei livelli
+    public GameObject[] levels;
+
+    //Variabili per la gestione della stamina
     [SerializeField] Text StaminaData;
     public int currentStamina;
+
+    //Variabili per la gestione delle munizioni
     [SerializeField] Text AmmoData;
     public int currentAmmo = 1;
 
@@ -18,9 +25,12 @@ public class GameController : MonoBehaviour
     public Transform[] startspawnlevels; //Permette di far spawnare il palyer nello spawn di inzio livello
     public Transform[] checkPoints;  //Array per i checkpoint 
 
-    [SerializeField] GameObject player;
+    //Variaibli per l'attivazione del guanto
     [SerializeField] GameObject gauntlet;
     [SerializeField] GameObject gauntlet2;
+
+    //Variabile per la gestione dei Chip
+    public GameObject[] chipUI;
 
     public void Awake()
     {
@@ -30,10 +40,14 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        ActiveLevel(0);
+
         hidemouse();
 
+        //Sceglie lo stato che permette di giocare
         state = GameState.play;
 
+        //Disattiva all'avvio tutti i panel eccetto quello della stamina
         foreach (GameObject panel in panels)
         {
             panel.SetActive(false);
@@ -49,21 +63,51 @@ public class GameController : MonoBehaviour
         StateMachine();
     }
 
+    //Metodo per lo spostamento tra livelli
     public void initLevel(int id)
     {
-        //ActiveLevel(id);
+        ActiveLevel(id);
         PlayerController.playercon.transform.position = startspawnlevels[id].position;
     }
 
+    //Metodo per la comparsa/scomparsa dei livelli
+    public void ActiveLevel(int id)
+    {
+        foreach(GameObject level in levels)
+        {
+            level.SetActive(false);
+        }
+
+
+        levels[id].SetActive(true);
+    }
+
+    //Metodo che riporta la stamina del player al massimo
     public void heal()
     {
         currentStamina = 100;
         StaminaData.text = currentStamina.ToString();
     }
+
+    //Metodo che aumenta le munizioni disponibili del player
     public void ammoUp()
     {
         currentAmmo += 1;
         AmmoData.text = currentAmmo.ToString();
+    }
+
+    //Metodo che mostra a schermo i chip raccolti
+    public void addChip(int chipCounter)
+    {
+        //Attiva il panel dedicato nel caso non sia ancora attivo
+        if (!panels[3].activeInHierarchy)
+        {
+            panels[3].SetActive(true);
+        }
+
+        //Codice che gestisce il numero di chip visibili a schermo
+        chipUI[chipCounter].SetActive(true);
+
     }
 
     //Metodo dedicato allo stato di IDLE
