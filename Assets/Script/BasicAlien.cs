@@ -63,7 +63,7 @@ public class BasicAlien : MonoBehaviour
             Vector3 directionToTarget = target.transform.position - transform.position;
             float angle = Vector3.Angle(transform.forward, directionToTarget);
             //Angolo di vista 
-            if (Mathf.Abs(angle) < 110 && isHuman == true)
+            if (Mathf.Abs(angle) <= 120 && isHuman == true)
             {
                 print("ti vedo");
                 Attack();
@@ -117,6 +117,7 @@ public class BasicAlien : MonoBehaviour
     void Attack()
     {
         animazione.SetFloat("Blend", 1f);
+        agent.speed = 3;
         agent.SetDestination(target.position);
         
     }
