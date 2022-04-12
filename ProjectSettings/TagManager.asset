@@ -8,6 +8,7 @@ TagManager:
   - Medikit
   - Ammo
   - EndLevel
+  - Chip
   layers:
   - Default
   - TransparentFX

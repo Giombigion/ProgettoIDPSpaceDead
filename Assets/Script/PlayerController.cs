@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
     float asseZ;
     float asseX;
     float rotX = 90;
+
+    //Variabile di controllo per l'interazione col guanto
     public bool take = false;
 
     //Varibili per il raycast.
@@ -31,6 +33,9 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] public int idlevel; //Variabile per l'assegnazione di un valore ad ogni livello
     [SerializeField] int checkcounter; //Variabile per il controllo dei chekpoints
+
+    //Variabili per la gestione dei chip
+    public int chipCounter = 0;
 
 
     public void Awake()
@@ -95,6 +100,7 @@ public class PlayerController : MonoBehaviour
 
         print(hit.gameObject.tag);
 
+        //Codice per l'ottenimento del guanto
         if (hit.gameObject.tag == "Gauntlet" && take == false)
         {
             GameController.instance.panels[0].SetActive(true);
@@ -105,18 +111,29 @@ public class PlayerController : MonoBehaviour
     }
     private void OnTriggerEnter(Collider hit)
     {
-
+        //Codice per la raccolta dei medikit
         if (hit.gameObject.tag == "Medikit")
         {
             Destroy(hit.gameObject);
             print("Your Health was maxed out");
             GameController.instance.heal();
         }
+
+        //Codice per la raccolta delle munizioni
         if (hit.gameObject.tag == "Ammo")
         {
             Destroy(hit.gameObject);
             print("You gained 1 ammo");
             GameController.instance.ammoUp();
+        }
+
+        //Codice per la raccolta dei chip
+        if (hit.gameObject.tag == "Chip")
+        {
+            print(chipCounter);
+            GameController.instance.addChip(chipCounter);
+            chipCounter += 1;
+            Destroy(hit.gameObject);
         }
 
         //Codice per il teletrasporto a fine livello
