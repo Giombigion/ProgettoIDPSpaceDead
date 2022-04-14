@@ -139,7 +139,9 @@ public class PlayerController : MonoBehaviour
         //Codice per il teletrasporto a fine livello
         if (hit.gameObject.tag == "EndLevel")
         {
+            GetComponent<CharacterController>().enabled = false;
             GameController.instance.initLevel(idlevel + 1);
+            GetComponent<CharacterController>().enabled = true;
         }
 
         //Codice per i check points
