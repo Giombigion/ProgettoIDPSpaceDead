@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    //Animator anim; //Assegno un nome al componente Animator.
+    Animator otherAnimator; //Assegno un nome al componente Animator del guanto.
     CharacterController controller; //Assegno un nome al componente CharacterController.
+
+   [SerializeField] GameObject otherObject; //Inserisco il guanto.
 
     //Variabili per il movimento
     public float speed = 12f; //Imposto la forza con cui il Players si muove orizontalmente.
@@ -41,6 +43,7 @@ public class PlayerController : MonoBehaviour
     public void Awake()
     {
         playercon = this;
+        otherAnimator = otherObject.GetComponent<Animator>();
     }
 
     private void Start()
@@ -82,8 +85,8 @@ public class PlayerController : MonoBehaviour
             float animSpeedY = Vector3.Dot(movements, controller.transform.forward);
 
             //animator con BLEND TREE
-            //anim.SetFloat("ypose", animSpeedY, 0.2f, Time.deltaTime);
-            //anim.SetFloat("xpose", animSpeedX, 0.2f, Time.deltaTime);
+            otherAnimator.SetFloat("yArma", animSpeedY, 0.2f, Time.deltaTime);
+            otherAnimator.SetFloat("xArma", animSpeedX, 0.2f, Time.deltaTime);
 
             Vector3 moveplayer = Vector3.forward * movements.z * speed + Vector3.right * movements.x * speedStrafe;
             moveplayer = transform.TransformDirection(moveplayer);
