@@ -9,6 +9,9 @@ public class GameController : MonoBehaviour
     public GameState state;
     public GameObject[] panels;
 
+    //Variabile per la gestione delle musiche
+    public GameObject[] music;
+
     //Variabile per la gestione dei livelli
     public GameObject[] levels;
 

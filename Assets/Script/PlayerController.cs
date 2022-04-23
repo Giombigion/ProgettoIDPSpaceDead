@@ -50,6 +50,7 @@ public class PlayerController : MonoBehaviour
     {
         //anim = GetComponent<Animator>();
         controller = GetComponent<CharacterController>();
+
     }
 
     // Update is called once per frame
