@@ -55,7 +55,6 @@ public class GameController : MonoBehaviour
         {
             panel.SetActive(false);
         }
-        panels[2].SetActive(true);
 
         initLevel(PlayerController.playercon.idlevel);
     }

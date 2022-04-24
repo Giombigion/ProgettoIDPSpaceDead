@@ -18,6 +18,9 @@ public class CutSceneController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (!cutscenes[0].activeInHierarchy)
+        {
+            GameController.instance.panels[2].SetActive(true);
+        }
     }
 }
