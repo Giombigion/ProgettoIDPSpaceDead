@@ -9,6 +9,8 @@ TagManager:
   - Ammo
   - EndLevel
   - Chip
+  - Door
+  - PulsantePorta
   layers:
   - Default
   - TransparentFX
