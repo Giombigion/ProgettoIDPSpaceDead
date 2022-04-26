@@ -12,7 +12,6 @@ public class CutSceneController : MonoBehaviour
     void Start()
     {
         cutscenes[0].SetActive(true);
-        cutscenes[1].SetActive(false);
     }
 
     // Update is called once per frame
