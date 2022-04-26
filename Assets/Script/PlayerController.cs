@@ -82,12 +82,12 @@ public class PlayerController : MonoBehaviour
 
             Vector3 movements = new Vector3(asseX, 0, asseZ);
 
-            float animSpeedX = Vector3.Dot(movements, controller.transform.right);
-            float animSpeedY = Vector3.Dot(movements, controller.transform.forward);
+            //float animSpeedX = Vector3.Dot(movements, controller.transform.right);
+            //float animSpeedY = Vector3.Dot(movements, controller.transform.forward);
 
             //animator con BLEND TREE
-            otherAnimator.SetFloat("yArma", animSpeedY, 0.2f, Time.deltaTime);
-            otherAnimator.SetFloat("xArma", animSpeedX, 0.2f, Time.deltaTime);
+            otherAnimator.SetFloat("yArma", asseZ, 0.2f, Time.deltaTime);
+            //otherAnimator.SetFloat("xArma", animSpeedX, 0.2f, Time.deltaTime);
 
             Vector3 moveplayer = Vector3.forward * movements.z * speed + Vector3.right * movements.x * speedStrafe;
             moveplayer = transform.TransformDirection(moveplayer);
