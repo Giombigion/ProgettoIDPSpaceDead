@@ -35,6 +35,9 @@ public class GameController : MonoBehaviour
     //Variabile per la gestione dei Chip
     public GameObject[] chipUI;
 
+    [Range(0,15)]
+    public float InteractiveOBJDistance;
+
     public void Awake()
     {
         instance = this;
