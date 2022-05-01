@@ -39,6 +39,13 @@ public class PlayerController : MonoBehaviour
     //Variabili per la gestione dei chip
     public int chipCounter = 0;
 
+    //Variabili per la gestione dello sparo
+    [SerializeField] public float maxTime = 0.5f;
+    [SerializeField] Transform weaponRayPoint;
+    [SerializeField] int length = 5;
+    public bool weaponEquipped;
+    bool isFired = false;
+    float timer;
 
     public void Awake()
     {
@@ -96,6 +103,9 @@ public class PlayerController : MonoBehaviour
 
             velocity.y += gravity * Time.deltaTime;
             controller.Move(velocity * Time.deltaTime);
+            
+            Shoot();
+
         }
     }
 
@@ -159,4 +169,61 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    //Codice per sparare
+    private void Shoot()
+    {
+
+        if (Input.GetButtonDown("Fire1") && weaponEquipped == true && isFired == false 
+            && GameController.instance.currentAmmo > 0 && GameController.instance.gauntlet2.activeInHierarchy)
+        {
+            print("bullet fired");
+            isFired = true;
+        }
+        else if(GameController.instance.currentAmmo == 0 && GameController.instance.gauntlet2.activeInHierarchy)
+        {
+            print("No ammo left");
+        }
+
+        if (isFired)
+        {
+            firing();
+        }
+
+    }
+
+    private void firing()
+    {
+        timer += Time.deltaTime;
+
+        if (timer > maxTime)
+        {
+
+            timer = 0;
+
+            RaycastHit hit;
+            if (Physics.Raycast(weaponRayPoint.position, weaponRayPoint.forward, out hit, length, layer))
+            {
+                print("Target hit");
+                print(hit.transform.name);
+
+                if (hit.transform.tag == "Alien")
+                {
+                    Destroy(hit.transform.gameObject);
+                }
+
+            }
+            else
+            {
+                print("Target not hit");
+            }
+
+            GameController.instance.currentAmmo -= 1;
+            GameController.instance.AmmoData.text = GameController.instance.currentAmmo.ToString();
+
+            isFired = false;
+
+            Debug.DrawRay(weaponRayPoint.position, weaponRayPoint.forward * length, Color.red);
+
+        }
+    }
 }

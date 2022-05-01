@@ -20,7 +20,7 @@ public class GameController : MonoBehaviour
     public int currentStamina;
 
     //Variabili per la gestione delle munizioni
-    [SerializeField] Text AmmoData;
+    [SerializeField] public Text AmmoData;
     public int currentAmmo = 1;
 
     [SerializeField] bool isMouseShowed;
@@ -30,7 +30,7 @@ public class GameController : MonoBehaviour
 
     //Variaibli per l'attivazione del guanto
     [SerializeField] GameObject gauntlet;
-    [SerializeField] GameObject gauntlet2;
+    [SerializeField] public GameObject gauntlet2;
 
     //Variabile per la gestione dei Chip
     public GameObject[] chipUI;
@@ -158,6 +158,8 @@ public class GameController : MonoBehaviour
             //PlayerController.playercon.take = false;
             panels[0].SetActive(false);
             panels[1].SetActive(true);
+
+            PlayerController.playercon.weaponEquipped = true;
 
             state = GameState.play;
         }
