@@ -17,8 +17,8 @@ public class BasicAlien : MonoBehaviour
 
     float distanzaWP;
     int contatorewaypoints;
-    [SerializeField] Transform raypoint;
-    [SerializeField] LayerMask layer;
+    [SerializeField] Transform raypointfront;
+    [SerializeField] Transform raypointback;
     [SerializeField] float lengthray;
     [SerializeField] bool isHuman;
 
@@ -42,7 +42,7 @@ public class BasicAlien : MonoBehaviour
  
             //Spheracast per il controllo della distanza tra il nemico e i vari oggetti
             RaycastHit hit;
-            if (Physics.SphereCast(raypoint.position, 1, transform.forward, out hit, 5))
+            if (Physics.SphereCast(raypointfront.position, 1, transform.forward, out hit, 5))
             {
                 if (hit.transform.gameObject.layer == 6)
                 {
@@ -56,8 +56,20 @@ public class BasicAlien : MonoBehaviour
                 print(hit.transform.gameObject.layer);
             }
 
+            RaycastHit hit1;
+            if (Physics.Raycast(raypointback.position, -raypointback.forward, out hit1, lengthray))
+            {
+                if(hit1.transform.gameObject.layer == 6)
+                {
+                    Attack();
+                }
+                else
+                {
+                    Patrol();
+                }
 
-            //Debug.DrawRay(raypoint.position, raypoint.forward * lengthray, Color.red);
+            }
+            Debug.DrawRay(raypointback.position, -raypointback.forward* lengthray, Color.blue);
 
             //
             Vector3 directionToTarget = target.transform.position - transform.position;
@@ -83,7 +95,7 @@ public class BasicAlien : MonoBehaviour
     {
         // Display the explosion radius when selected
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(raypoint.position, 5);
+        Gizmos.DrawWireSphere(raypointfront.position, 5);
     }
 
     void Patrol()
