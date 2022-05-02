@@ -201,7 +201,7 @@ public class PlayerController : MonoBehaviour
             timer = 0;
 
             RaycastHit hit;
-            if (Physics.Raycast(weaponRayPoint.position, weaponRayPoint.forward, out hit, length, layer))
+            if (Physics.Raycast(weaponRayPoint.position, weaponRayPoint.forward, out hit, length))
             {
                 print("Target hit");
                 print(hit.transform.name);
