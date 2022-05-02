@@ -211,6 +211,11 @@ public class PlayerController : MonoBehaviour
                     Destroy(hit.transform.gameObject);
                 }
 
+                if (hit.transform.tag == "PulsantePorta")
+                {
+                    hit.transform.gameObject.GetComponent<ScriptPulsantePorta>().animPort.Play("PortaAperta", -1, 0);
+                }
+
             }
             else
             {
