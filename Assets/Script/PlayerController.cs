@@ -47,6 +47,7 @@ public class PlayerController : MonoBehaviour
     bool isFired = false;
     float timer;
     float height;
+    float runSpeed;
 
     public void Awake()
     {
@@ -70,8 +71,24 @@ public class PlayerController : MonoBehaviour
             isGround = Physics.CheckSphere(raypoint.position, groundDistance, layer);
             Jump = Input.GetButtonDown("Jump");
 
-            //Cruch
+
+            var run = Input.GetKey(KeyCode.LeftShift);
             var cruch = Input.GetKey(KeyCode.LeftControl);
+
+            //RUN
+            if (run)
+            {
+                runSpeed = 2;
+            }
+            else
+            {
+                runSpeed = 1;
+            }
+            height = Mathf.Lerp(height, controller.height, Time.deltaTime * 2);
+            controller.height = height;
+            //end RUN
+
+            //Cruch
             if (cruch)
             {
                 height = 0.5f;
@@ -111,7 +128,7 @@ public class PlayerController : MonoBehaviour
             otherAnimator.SetFloat("yArma", asseZ, 0.2f, Time.deltaTime);
             //otherAnimator.SetFloat("xArma", animSpeedX, 0.2f, Time.deltaTime);
 
-            Vector3 moveplayer = Vector3.forward * movements.z * speed + Vector3.right * movements.x * speedStrafe;
+            Vector3 moveplayer = Vector3.forward * movements.z * speed * runSpeed + Vector3.right * movements.x * speedStrafe;
             moveplayer = transform.TransformDirection(moveplayer);
             controller.Move(moveplayer*Time.deltaTime);
             //transform.rotation = Quaternion.Euler(0, rotX * rotSpeed , 0);
