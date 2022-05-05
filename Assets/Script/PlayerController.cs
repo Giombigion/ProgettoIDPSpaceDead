@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviour
     public bool weaponEquipped;
     bool isFired = false;
     float timer;
+    float height;
 
     public void Awake()
     {
@@ -68,6 +69,18 @@ public class PlayerController : MonoBehaviour
         {
             isGround = Physics.CheckSphere(raypoint.position, groundDistance, layer);
             Jump = Input.GetButtonDown("Jump");
+            var cruch = Input.GetKey(KeyCode.LeftControl);
+            
+            if (cruch)
+            {
+                height = 0.5f;
+            }
+            else {
+                height = 2;
+            }
+            height = Mathf.Lerp(height, controller.height,Time.deltaTime*2);
+            controller.height = height;
+
 
             //Imposta l'animazione del salto
             if (Jump && isGround)
