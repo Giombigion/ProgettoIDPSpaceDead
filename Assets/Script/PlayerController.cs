@@ -84,8 +84,6 @@ public class PlayerController : MonoBehaviour
             {
                 runSpeed = 1;
             }
-            height = Mathf.Lerp(height, controller.height, Time.deltaTime * 2);
-            controller.height = height;
             //end RUN
 
             //Cruch
