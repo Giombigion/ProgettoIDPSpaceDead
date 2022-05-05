@@ -69,8 +69,9 @@ public class PlayerController : MonoBehaviour
         {
             isGround = Physics.CheckSphere(raypoint.position, groundDistance, layer);
             Jump = Input.GetButtonDown("Jump");
+
+            //Cruch
             var cruch = Input.GetKey(KeyCode.LeftControl);
-            
             if (cruch)
             {
                 height = 0.5f;
@@ -80,6 +81,7 @@ public class PlayerController : MonoBehaviour
             }
             height = Mathf.Lerp(height, controller.height,Time.deltaTime*2);
             controller.height = height;
+            //end Cruch
 
 
             //Imposta l'animazione del salto
