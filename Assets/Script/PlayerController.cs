@@ -90,6 +90,7 @@ public class PlayerController : MonoBehaviour
             if (cruch)
             {
                 height = 0.5f;
+                runSpeed = 0.5f;
             }
             else {
                 height = 2;

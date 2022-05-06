@@ -157,7 +157,9 @@ public class GameController : MonoBehaviour
             gauntlet2.SetActive(true);
             //PlayerController.playercon.take = false;
             panels[0].SetActive(false);
-            panels[1].SetActive(true);
+            panels[1].SetActive(true); 
+            panels[4].SetActive(true);
+
 
             PlayerController.playercon.weaponEquipped = true;
 
