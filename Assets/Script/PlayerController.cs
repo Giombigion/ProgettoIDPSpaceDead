@@ -203,6 +203,7 @@ public class PlayerController : MonoBehaviour
     //Codice per sparare
     private void Shoot()
     {
+        Debug.DrawRay(weaponRayPoint.position, weaponRayPoint.forward * length, Color.red);
 
         if (Input.GetButtonDown("Fire1") && weaponEquipped == true && isFired == false 
             && GameController.instance.currentAmmo > 0 && GameController.instance.gauntlet2.activeInHierarchy)
@@ -257,8 +258,6 @@ public class PlayerController : MonoBehaviour
             GameController.instance.AmmoData.text = GameController.instance.currentAmmo.ToString();
 
             isFired = false;
-
-            Debug.DrawRay(weaponRayPoint.position, weaponRayPoint.forward * length, Color.red);
 
         }
     }
