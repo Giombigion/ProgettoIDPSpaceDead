@@ -21,6 +21,7 @@ public class BasicAlien : MonoBehaviour
     [SerializeField] Transform raypointback;
     [SerializeField] float lengthray;
     [SerializeField] bool isHuman;
+    [SerializeField] LayerMask layer;
 
     float timer;
 
@@ -44,7 +45,7 @@ public class BasicAlien : MonoBehaviour
             RaycastHit hit;
             if (Physics.SphereCast(raypointfront.position, 1, transform.forward, out hit, 5))
             {
-                if (hit.transform.gameObject.layer == 6)
+                if (hit.transform.gameObject.layer == layer)
                 {
                     isHuman = true;
                 }
@@ -59,7 +60,7 @@ public class BasicAlien : MonoBehaviour
             RaycastHit hit1;
             if (Physics.Raycast(raypointback.position, -raypointback.forward, out hit1, lengthray))
             {
-                if(hit1.transform.gameObject.layer == 6)
+                if(hit1.transform.gameObject.layer == layer)
                 {
                     Attack();
                 }
