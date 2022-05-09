@@ -118,29 +118,29 @@ public class GameController : MonoBehaviour
     //Metodo dedicato allo stato di IDLE
     public void _IDLE()
     {
-        print("Sono in Idle");
+        //print("Sono in Idle");
     }
 
     //Metodo dedicato allo stato di PLAY
     public void _PLAY()
     {
-        print("Sono in Play");
+        //print("Sono in Play");
     }
 
     //Metodo dedicato allo stato di DEAD
     public void _DEAD()
     {
-        print("Sono in Dead");
+        //print("Sono in Dead");
     }
 
     //Metodo dedicato allo stato di PAUSE
     public void _PAUSE()
     {
-        print("Sono in Pause");
+        //print("Sono in Pause");
     }
     public void _TAKE()
     {
-        print("Sono in Take");
+        //print("Sono in Take");
 
         if (Input.GetKeyDown(KeyCode.X))
         {
