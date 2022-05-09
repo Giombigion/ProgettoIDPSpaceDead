@@ -12,6 +12,7 @@ TagManager:
   - Door
   - PulsantePorta
   - Laser
+  - Alien
   layers:
   - Default
   - TransparentFX

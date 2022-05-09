@@ -9,7 +9,6 @@ public class BasicAlien : MonoBehaviour
     [SerializeField] float force;
     Rigidbody rb;
     NavMeshAgent agent;
-    //[SerializeField] Transform[] WayPoints;
     [SerializeField] Transform[] Paths;
     [SerializeField] int IDPaths;
     Animator animazione;
@@ -25,7 +24,7 @@ public class BasicAlien : MonoBehaviour
 
     float timer;
 
-    // Start is called before the first frame update
+    
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -33,7 +32,7 @@ public class BasicAlien : MonoBehaviour
         animazione = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
         if (GameController.instance.state == GameState.play)
@@ -45,7 +44,7 @@ public class BasicAlien : MonoBehaviour
             RaycastHit hit;
             if (Physics.SphereCast(raypointfront.position, 1, transform.forward, out hit, 5))
             {
-                if (hit.transform.gameObject.layer == layer)
+                if (/*hit.transform.gameObject.layer == layer*/ layer == 6)
                 {
                     isHuman = true;
                 }
@@ -57,6 +56,7 @@ public class BasicAlien : MonoBehaviour
                 print(hit.transform.gameObject.layer);
             }
 
+            //Raycast che permette di capire al nemico che il player si trova alle sue spelle
             RaycastHit hit1;
             if (Physics.Raycast(raypointback.position, -raypointback.forward, out hit1, lengthray))
             {
@@ -99,14 +99,13 @@ public class BasicAlien : MonoBehaviour
         Gizmos.DrawWireSphere(raypointfront.position, 5);
     }
 
+
+    //Codice per la ronda dei Nemici
     void Patrol()
     {
-        //animazione.SetBool("isAttacking", false);
-        //animazione.SetFloat("Blend", 0.5f);
-
         Transform EnemyPaths = Paths[IDPaths].transform.GetChild(contatorewaypoints);
         distanzaWP = Vector3.Distance(transform.position, EnemyPaths.position);
-        //print(distanzaWP);
+        
 
         if (distanzaWP < 2)
         {
@@ -127,6 +126,8 @@ public class BasicAlien : MonoBehaviour
 
     }
     
+
+    //Codice per l'attacco dei Nemici
     void Attack()
     {
         animazione.SetFloat("Blend", 1f);
