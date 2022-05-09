@@ -203,7 +203,11 @@ public class PlayerController : MonoBehaviour
     //Codice per sparare
     private void Shoot()
     {
-        Debug.DrawRay(weaponRayPoint.position, weaponRayPoint.forward * length, Color.red);
+        //Debug.DrawRay(weaponRayPoint.position, weaponRayPoint.forward * length, Color.red);
+
+        //SEGUE IL MOUSE
+        Debug.DrawRay(weaponRayPoint.position, Camera.main.ScreenPointToRay(Input.mousePosition).direction * 100, Color.blue);
+        //
 
         if (Input.GetButtonDown("Fire1") && weaponEquipped == true && isFired == false 
             && GameController.instance.currentAmmo > 0 && GameController.instance.gauntlet2.activeInHierarchy)
@@ -218,10 +222,27 @@ public class PlayerController : MonoBehaviour
 
         if (isFired)
         {
-            firing();
+            FiringRay();
+            //firing();
         }
 
     }
+
+    void FiringRay() {
+        RaycastHit hit;
+
+        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out hit, length))
+        {
+            print(hit.transform.name);
+        }
+
+        GameController.instance.currentAmmo -= 1;
+        GameController.instance.AmmoData.text = GameController.instance.currentAmmo.ToString();
+
+        isFired = false;
+    }
+
 
     private void firing()
     {
@@ -247,7 +268,7 @@ public class PlayerController : MonoBehaviour
                 {
                     hit.transform.gameObject.GetComponent<ScriptPulsantePorta>().animPort.Play("PortaAperta", -1, 0);
                 }
-
+               // Debug.DrawRay(weaponRayPoint.position, weaponRayPoint.transform.TransformDirection(Vector3.forward) * 1000, Color.red);
             }
             else
             {
