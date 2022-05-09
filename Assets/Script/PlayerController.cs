@@ -235,6 +235,16 @@ public class PlayerController : MonoBehaviour
         if (Physics.Raycast(ray, out hit, length))
         {
             print(hit.transform.name);
+
+            if (hit.transform.tag == "Alien")
+            {
+                Destroy(hit.transform.gameObject);
+            }
+            else if (hit.transform.tag == "PulsantePorta")
+            {
+                hit.transform.gameObject.GetComponent<ScriptPulsantePorta>().animPort.Play("PortaAperta", -1, 0);
+            }
+
         }
 
         GameController.instance.currentAmmo -= 1;
