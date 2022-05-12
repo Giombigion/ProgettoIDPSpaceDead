@@ -18,9 +18,9 @@ public class BasicAlien : MonoBehaviour
     int contatorewaypoints;
     [SerializeField] Transform raypointfront;
     [SerializeField] Transform raypointback;
-    [SerializeField] float lengthray;
     [SerializeField] float lengthsphere;
     [SerializeField] bool isHuman;
+    [SerializeField] float distanza;
 
     float timer;
 
@@ -56,36 +56,31 @@ public class BasicAlien : MonoBehaviour
                 print(hit.transform.gameObject.layer);
             }
 
-            //Raycast che permette di capire al nemico che il player si trova alle sue spelle
-            RaycastHit hit1;
-            if (Physics.Raycast(raypointback.position, -raypointback.forward, out hit1, lengthray))
-            {
-                if(hit1.transform.gameObject.layer == 6)
-                {
-                    Attack();
-                }
-                else
-                {
-                    Patrol();
-                }
 
-            }
-            Debug.DrawRay(raypointback.position, -raypointback.forward* lengthray, Color.blue);
+            //Angolo di vista e azioni
 
-            //
-            Vector3 directionToTarget = target.transform.position - transform.position;
-            float angle = Vector3.Angle(transform.forward, directionToTarget);
-            //Angolo di vista 
-            if (Mathf.Abs(angle) <= 120 && isHuman == true)
+            distanza = Vector3.Distance(transform.position, target.transform.position);
+
+            if (isFrontOff (270) && isHuman == true)
             {
                 print("ti vedo");
                 Attack();
             }
             else
             {
-                print("non ti vedo");
-                Patrol();
+                if (distanza < 3)
+                {
+                    print("pensavi di farla franca!!");
+                    Attack();
+                }
+                else
+                {
+                    print("non ti vedo");
+                    Patrol();
+                }
+                
             }
+                       
 
             var changeAnim = Vector3.Dot(agent.velocity, agent.transform.forward);
             animazione.SetFloat("Blend", changeAnim,0.2f,Time.deltaTime);
@@ -96,7 +91,7 @@ public class BasicAlien : MonoBehaviour
     {
         // Display the explosion radius when selected
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(raypointfront.position, 5);
+        Gizmos.DrawWireSphere(raypointfront.position, lengthsphere);
     }
 
 
@@ -134,5 +129,20 @@ public class BasicAlien : MonoBehaviour
         agent.speed = 3;
         agent.SetDestination(target.position);
         
+    }
+
+    bool isFrontOff(float visuale)
+    {
+        var direzioneTarget = (transform.position - target.transform.position).normalized;
+        var angle = Mathf.Acos(Vector3.Dot(transform.forward.normalized, direzioneTarget)) * 100;
+        //print("DEBUG ANGLE:" + angle);
+        if (angle < visuale)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
 }
