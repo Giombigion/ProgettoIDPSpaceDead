@@ -19,8 +19,8 @@ public class BasicAlien : MonoBehaviour
     [SerializeField] Transform raypointfront;
     [SerializeField] Transform raypointback;
     [SerializeField] float lengthray;
+    [SerializeField] float lengthsphere;
     [SerializeField] bool isHuman;
-    [SerializeField] LayerMask layer;
 
     float timer;
 
@@ -42,9 +42,9 @@ public class BasicAlien : MonoBehaviour
  
             //Spheracast per il controllo della distanza tra il nemico e i vari oggetti
             RaycastHit hit;
-            if (Physics.SphereCast(raypointfront.position, 1, transform.forward, out hit, 5))
+            if (Physics.SphereCast(raypointfront.position, 1, transform.forward, out hit, lengthsphere))
             {
-                if (/*hit.transform.gameObject.layer == layer*/ layer == 6)
+                if (hit.transform.gameObject.layer ==  6)
                 {
                     isHuman = true;
                 }
@@ -60,7 +60,7 @@ public class BasicAlien : MonoBehaviour
             RaycastHit hit1;
             if (Physics.Raycast(raypointback.position, -raypointback.forward, out hit1, lengthray))
             {
-                if(hit1.transform.gameObject.layer == layer)
+                if(hit1.transform.gameObject.layer == 6)
                 {
                     Attack();
                 }
