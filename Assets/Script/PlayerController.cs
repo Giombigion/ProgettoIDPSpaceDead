@@ -152,14 +152,34 @@ public class PlayerController : MonoBehaviour
         }
 
     }
+
     private void OnTriggerEnter(Collider hit)
     {
+        if (hit.gameObject.tag == "Collezzionabili")
+        {
+            hit.gameObject.GetComponent<BoxCollider>().enabled = false;
+
+            var Obj = hit.gameObject.GetComponent<CollectableScript>();
+
+            if (Obj.ID == 0)
+            {
+                Destroy(hit.gameObject);
+                GameController.instance.heal(Obj.maxhealth);
+            }
+            if (Obj.ID == 1)
+            {
+                Destroy(hit.gameObject);
+                GameController.instance.ammoUp(Obj.maxammo);
+            }
+        }
+
+        /*
         //Codice per la raccolta dei medikit
         if (hit.gameObject.tag == "Medikit")
         {
             Destroy(hit.gameObject);
             print("Your Health was maxed out");
-            GameController.instance.heal();
+            //GameController.instance.heal();
         }
 
         //Codice per la raccolta delle munizioni
@@ -167,8 +187,9 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(hit.gameObject);
             print("You gained 1 ammo");
-            GameController.instance.ammoUp();
+            //GameController.instance.ammoUp();
         }
+        */
 
         //Codice per la raccolta dei chip
         if (hit.gameObject.tag == "Chip")

@@ -87,17 +87,22 @@ public class GameController : MonoBehaviour
         levels[id].SetActive(true);
     }
 
+    /// <summary>
+    /// Energia Player
+    /// </summary>
+    /// <param name="h"></param>
     //Metodo che riporta la stamina del player al massimo
-    public void heal()
+    public void heal(int h)
     {
-        currentStamina = 100;
+        currentStamina += h;
+        currentStamina = Mathf.Clamp(currentStamina, 0, 100);
         StaminaData.text = currentStamina.ToString();
     }
 
     //Metodo che aumenta le munizioni disponibili del player
-    public void ammoUp()
+    public void ammoUp(int a)
     {
-        currentAmmo += 1;
+        currentAmmo += a;
         AmmoData.text = currentAmmo.ToString();
     }
 
