@@ -8,7 +8,7 @@ public class BasicAlien : MonoBehaviour
     [SerializeField] Transform target;
     [SerializeField] float force;
     Rigidbody rb;
-    NavMeshAgent agent;
+    public NavMeshAgent agent;
     [SerializeField] Transform[] Paths;
     [SerializeField] int IDPaths;
     Animator animazione;

@@ -74,7 +74,8 @@ public class GunScript : MonoBehaviour
 
             if (hit.transform.tag == "Alien")
             {
-                Destroy(hit.transform.gameObject);
+                BlockEnemy.block.Stun();
+                //Destroy(hit.transform.gameObject);
             }
             else if (hit.transform.tag == "PulsantePorta")
             {
