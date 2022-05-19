@@ -74,10 +74,10 @@ public class GunScript : MonoBehaviour
 
             if (hit.transform.tag == "Alien")
             {
-                BlockEnemy.block.Stun();
-                //Destroy(hit.transform.gameObject);
+                BlockEnemy.block.isHit = true;
+                print("colpito");
             }
-            else if (hit.transform.tag == "PulsantePorta")
+            if (hit.transform.tag == "PulsantePorta")
             {
                 hit.transform.gameObject.GetComponent<ScriptPulsantePorta>().animPort.Play("PortaAperta", -1, 0);
             }

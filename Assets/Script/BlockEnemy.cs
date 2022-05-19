@@ -7,6 +7,7 @@ public class BlockEnemy : MonoBehaviour
     public float StunTime;
     float timer = 0;
     public static BlockEnemy block;
+    public bool isHit;
 
     [SerializeField] BasicAlien _basicAlien;
 
@@ -24,14 +25,15 @@ public class BlockEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        //timer += Time.deltaTime;
-
+        if (isHit)
+            Stun();
     }
 
     public void Stun()
     {
         _basicAlien.agent.speed = 0;
+
+        timer += Time.deltaTime;
 
         if (timer > StunTime)
         {
@@ -39,6 +41,8 @@ public class BlockEnemy : MonoBehaviour
             timer = 0;
 
             _basicAlien.agent.speed = 3.5f;
+
+            isHit = false;
 
         }
     }
