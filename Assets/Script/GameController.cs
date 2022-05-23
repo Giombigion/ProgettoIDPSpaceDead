@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour
     public static GameController instance;
     public GameState state;
     public GameObject[] panels;
+    [SerializeField] public int idlevel; //Variabile per l'assegnazione di un valore ad ogni livello
 
     //Variabile per la gestione delle musiche
     public GameObject[] music;
@@ -59,7 +60,7 @@ public class GameController : MonoBehaviour
             panel.SetActive(false);
         }
 
-        initLevel(PlayerController.playercon.idlevel);
+        initLevel(GameController.instance.idlevel);
     }
 
     // Update is called once per frame

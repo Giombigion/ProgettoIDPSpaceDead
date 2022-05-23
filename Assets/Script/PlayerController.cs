@@ -33,7 +33,6 @@ public class PlayerController : MonoBehaviour
 
     public static PlayerController playercon;
 
-    [SerializeField] public int idlevel; //Variabile per l'assegnazione di un valore ad ogni livello
     [SerializeField] int checkcounter; //Variabile per il controllo dei chekpoints
 
     //Variabili per la gestione dei chip
@@ -153,6 +152,19 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    private void OnCollisionExit(Collision hit)
+    {
+        print(hit.gameObject.tag);
+
+        //Codice per l'ottenimento del guanto
+        if (hit.gameObject.tag == "Gauntlet" && take == true)
+        {
+            GameController.instance.panels[0].SetActive(false);
+            GameController.instance.state = GameState.play;
+            take = false;
+        }
+    }
+
     private void OnTriggerEnter(Collider hit)
     {
         if (hit.gameObject.tag == "Collezzionabili")
@@ -204,7 +216,7 @@ public class PlayerController : MonoBehaviour
         if (hit.gameObject.tag == "EndLevel")
         {
             GetComponent<CharacterController>().enabled = false;
-            GameController.instance.initLevel(idlevel + 1);
+            GameController.instance.initLevel(GameController.instance.idlevel + 1);
             GetComponent<CharacterController>().enabled = true;
         }
 
