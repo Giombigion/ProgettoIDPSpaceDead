@@ -185,6 +185,14 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        if (hit.gameObject.tag == "PulsantePorta")
+        {
+            if (GameController.instance.Keys[hit.gameObject.GetComponent<ScriptPulsantePorta>().ID])
+            {
+                hit.transform.gameObject.GetComponent<ScriptPulsantePorta>().animPort.Play("PortaAperta", -1, 0);
+            }
+        }
+
         /*
         //Codice per la raccolta dei medikit
         if (hit.gameObject.tag == "Medikit")

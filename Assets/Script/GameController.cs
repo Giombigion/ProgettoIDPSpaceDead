@@ -16,6 +16,9 @@ public class GameController : MonoBehaviour
     //Variabile per la gestione dei livelli
     public GameObject[] levels;
 
+    //Variabile per la gestione delle porte
+    public bool[] Keys;
+
     //Variabili per la gestione della stamina
     [SerializeField] Text StaminaData;
     public int currentStamina;

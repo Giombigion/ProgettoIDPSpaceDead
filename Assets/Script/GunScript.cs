@@ -77,11 +77,6 @@ public class GunScript : MonoBehaviour
                 BlockEnemy.block.isHit = true;
                 print("colpito");
             }
-            if (hit.transform.tag == "PulsantePorta")
-            {
-                hit.transform.gameObject.GetComponent<ScriptPulsantePorta>().animPort.Play("PortaAperta", -1, 0);
-            }
-
         }
 
         GameController.instance.currentAmmo -= 1;
