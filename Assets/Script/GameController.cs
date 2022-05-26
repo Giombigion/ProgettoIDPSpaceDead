@@ -50,7 +50,7 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ActiveLevel(0);
+        initLevel(idlevel);
 
         hidemouse();
 
@@ -63,7 +63,13 @@ public class GameController : MonoBehaviour
             panel.SetActive(false);
         }
 
-        initLevel(GameController.instance.idlevel);
+        if (idlevel != 0)
+        {
+            gauntlet2.SetActive(true);
+            panels[1].SetActive(true);
+            panels[4].SetActive(true);
+            PlayerController.playercon.weaponEquipped = true;
+        }
     }
 
     // Update is called once per frame

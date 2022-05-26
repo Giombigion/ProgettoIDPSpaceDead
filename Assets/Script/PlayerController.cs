@@ -163,6 +163,10 @@ public class PlayerController : MonoBehaviour
             GameController.instance.state = GameState.play;
             take = false;
         }
+        if (hit.gameObject.tag == "Alien")
+        {
+            this.transform.position = GameController.instance.checkPoints[GameController.instance.idlevel].position;
+        }
     }
 
     private void OnTriggerEnter(Collider hit)
