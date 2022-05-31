@@ -157,7 +157,7 @@ public class GameController : MonoBehaviour
     {
         //print("Sono in Take");
 
-        if (Input.GetKeyDown(KeyCode.X))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             Destroy(gauntlet.gameObject);
 
@@ -173,13 +173,29 @@ public class GameController : MonoBehaviour
             //PlayerController.playercon.take = false;
             panels[0].SetActive(false);
             panels[1].SetActive(true); 
-            panels[4].SetActive(true);
 
 
             PlayerController.playercon.weaponEquipped = true;
+            
+            state = GameState.tutorial;
 
-            state = GameState.play;
         }
+    }
+
+    public void _TUTORIAL()
+    {
+
+        panels[5].SetActive(true);
+
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            panels[5].SetActive(false);
+            
+            state = GameState.play;
+
+            panels[4].SetActive(true);
+        }
+
     }
 
     void hidemouse()
@@ -214,6 +230,9 @@ public class GameController : MonoBehaviour
                 break;
             case GameState.take:
                 _TAKE();
+                break;
+            case GameState.tutorial:
+                _TUTORIAL();
                 break;
         }
     }
