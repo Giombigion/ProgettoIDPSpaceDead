@@ -166,6 +166,10 @@ public class PlayerController : MonoBehaviour
             GameController.instance.state = GameState.play;
             take = false;
         }
+    }
+
+    public void OnCollisionStay(Collision hit)
+    {
         if (hit.gameObject.tag == "Alien")
         {
             this.transform.position = GameController.instance.checkPoints[GameController.instance.idlevel].position;
@@ -245,7 +249,8 @@ public class PlayerController : MonoBehaviour
         if (hit.gameObject.tag == "EndLevel")
         {
             GetComponent<CharacterController>().enabled = false;
-            GameController.instance.initLevel(GameController.instance.idlevel + 1);
+            GameController.instance.idlevel += 1;
+            GameController.instance.initLevel(GameController.instance.idlevel);
             GetComponent<CharacterController>().enabled = true;
         }
 
