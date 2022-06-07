@@ -152,6 +152,14 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    private void OnCollisionStay(Collision hit)
+    {
+        if (hit.gameObject.tag == "Alien")
+        {
+            this.transform.position = GameController.instance.checkPoints[GameController.instance.idlevel].position;
+        }
+    }
+
     private void OnCollisionExit(Collision hit)
     {
         print(hit.gameObject.tag);
@@ -162,10 +170,6 @@ public class PlayerController : MonoBehaviour
             GameController.instance.panels[0].SetActive(false);
             GameController.instance.state = GameState.play;
             take = false;
-        }
-        if (hit.gameObject.tag == "Alien")
-        {
-            this.transform.position = GameController.instance.checkPoints[GameController.instance.idlevel].position;
         }
     }
 
