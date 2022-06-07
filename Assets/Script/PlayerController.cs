@@ -170,6 +170,7 @@ public class PlayerController : MonoBehaviour
         {
             this.transform.position = GameController.instance.checkPoints[GameController.instance.idlevel].position;
         }
+<<<<<<< Updated upstream
     }
 
     public void Key(int key)
@@ -182,6 +183,8 @@ public class PlayerController : MonoBehaviour
 
         GameController.instance.Keys[key] = true;
         Debug.Log("Chip");
+=======
+>>>>>>> Stashed changes
     }
 
     private void OnTriggerEnter(Collider hit)
