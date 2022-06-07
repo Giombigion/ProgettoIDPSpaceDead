@@ -157,10 +157,16 @@ public class GameController : MonoBehaviour
     {
         //print("Sono in Take");
 
-        if (Input.GetKeyDown(KeyCode.X))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             Destroy(gauntlet.gameObject);
 
+            panels[5].SetActive(true);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            panels[5].SetActive(false);
 
             //Disabilita il collider 
             //gauntlet2.GetComponent<BoxCollider>().enabled = false;
@@ -172,7 +178,7 @@ public class GameController : MonoBehaviour
             gauntlet2.SetActive(true);
             //PlayerController.playercon.take = false;
             panels[0].SetActive(false);
-            panels[1].SetActive(true); 
+            panels[1].SetActive(true);
             panels[4].SetActive(true);
 
 
