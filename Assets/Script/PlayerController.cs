@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
     Animator otherAnimator; //Assegno un nome al componente Animator del guanto.
     CharacterController controller; //Assegno un nome al componente CharacterController.
 
+    ChipScript chipscript;
+
    [SerializeField] GameObject otherObject; //Inserisco il guanto.
 
     //Variabili per il movimento
@@ -35,9 +37,6 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] int checkcounter; //Variabile per il controllo dei chekpoints
 
-    //Variabili per la gestione dei chip
-    public int chipCounter = 0;
-
     //Variabili per la gestione dello sparo
     float timer;
     public bool weaponEquipped;
@@ -45,6 +44,9 @@ public class PlayerController : MonoBehaviour
     float runSpeed;
 
     [SerializeField] GunScript _gunScript;
+
+    //Variabili per la gestione dei chip
+    public int chipCounter = 0;
 
     public void Awake()
     {
@@ -56,6 +58,7 @@ public class PlayerController : MonoBehaviour
     {
         //anim = GetComponent<Animator>();
         controller = GetComponent<CharacterController>();
+        chipscript = new ChipScript();
 
     }
 
@@ -169,6 +172,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void Key(int key)
+    {
+        print(chipCounter);
+        GameController.instance.addChip(chipCounter);
+        chipCounter += 1;
+
+        Debug.Log("Sto raccogliendo chip");
+
+        GameController.instance.Keys[key] = true;
+        Debug.Log("Chip");
+    }
+
     private void OnTriggerEnter(Collider hit)
     {
         if (hit.gameObject.tag == "Collezzionabili")
@@ -218,9 +233,8 @@ public class PlayerController : MonoBehaviour
         //Codice per la raccolta dei chip
         if (hit.gameObject.tag == "Chip")
         {
-            print(chipCounter);
-            GameController.instance.addChip(chipCounter);
-            chipCounter += 1;
+            Key(hit.gameObject.GetComponent<ChipScript>().keyID);
+
             Destroy(hit.gameObject);
         }
 
