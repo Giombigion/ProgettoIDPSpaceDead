@@ -133,6 +133,7 @@ public class PlayerController : MonoBehaviour
             controller.Move(moveplayer * Time.deltaTime);
             //transform.rotation = Quaternion.Euler(0, rotX * rotSpeed , 0);
             _gunScript.Shoot();
+            CharacterMove();
 
         }
         else {
