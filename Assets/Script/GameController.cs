@@ -20,7 +20,7 @@ public class GameController : MonoBehaviour
     public bool[] Keys;
 
     //Variabili per la gestione della stamina
-    [SerializeField] Text StaminaData;
+    [SerializeField] public Text StaminaData;
     public int currentStamina;
 
     //Variabili per la gestione delle munizioni

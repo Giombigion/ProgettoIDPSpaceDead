@@ -36,7 +36,7 @@ public class BlockEnemy : MonoBehaviour
 
         particles.enableEmission = true;
 
-        _basicAlien.agent.speed = 0;
+        _basicAlien.agent.isStopped = true;
 
         timer += Time.deltaTime;
 
@@ -45,7 +45,7 @@ public class BlockEnemy : MonoBehaviour
 
             timer = 0;
 
-            _basicAlien.agent.speed = 3.5f;
+            _basicAlien.agent.isStopped = false;
 
             particles.enableEmission = false;
 
