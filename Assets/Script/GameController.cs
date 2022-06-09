@@ -20,7 +20,7 @@ public class GameController : MonoBehaviour
     public bool[] Keys;
 
     //Variabili per la gestione della stamina
-    [SerializeField] Text StaminaData;
+    [SerializeField] public Text StaminaData;
     public int currentStamina;
 
     //Variabili per la gestione delle munizioni
@@ -161,8 +161,15 @@ public class GameController : MonoBehaviour
         {
             Destroy(gauntlet.gameObject);
 
-            panels[5].SetActive(true);
+            state = GameState.tutorial;
         }
+    }
+
+    public void _TUTORIAL()
+    {
+
+        panels[5].SetActive(true);
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             panels[5].SetActive(false);
@@ -184,6 +191,7 @@ public class GameController : MonoBehaviour
             PlayerController.playercon.weaponEquipped = true;
 
             state = GameState.play;
+
         }
     }
 
@@ -219,6 +227,9 @@ public class GameController : MonoBehaviour
                 break;
             case GameState.take:
                 _TAKE();
+                break;
+            case GameState.tutorial:
+                _TUTORIAL();
                 break;
         }
     }

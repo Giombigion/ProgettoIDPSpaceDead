@@ -47,7 +47,7 @@ public class GunScript : MonoBehaviour
         Debug.DrawRay(weaponRayPoint.position, Camera.main.ScreenPointToRay(Input.mousePosition).direction * 100, Color.blue);
 
         if (Input.GetButtonDown("Fire1") && PlayerController.playercon.weaponEquipped == true && isFired == false
-            && GameController.instance.currentAmmo > 0 && GameController.instance.gauntlet2.activeInHierarchy)
+            && GameController.instance.currentStamina > 5 && GameController.instance.gauntlet2.activeInHierarchy)
         {
             print("bullet fired");
             isFired = true;
@@ -79,8 +79,8 @@ public class GunScript : MonoBehaviour
             }
         }
 
-        GameController.instance.currentAmmo -= 1;
-        GameController.instance.AmmoData.text = GameController.instance.currentAmmo.ToString();
+        GameController.instance.currentStamina -= 5;
+        GameController.instance.StaminaData.text = GameController.instance.currentStamina.ToString();
 
         isFired = false;
     }
