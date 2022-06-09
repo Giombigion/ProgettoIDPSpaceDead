@@ -8,6 +8,8 @@ public class GameController : MonoBehaviour
     public static GameController instance;
     public GameState state;
     public GameObject[] panels;
+    [SerializeField] Testi _testi;
+
     [SerializeField] public int idlevel; //Variabile per l'assegnazione di un valore ad ogni livello
 
     //Variabile per la gestione delle musiche
@@ -70,6 +72,18 @@ public class GameController : MonoBehaviour
             panels[4].SetActive(true);
             PlayerController.playercon.weaponEquipped = true;
         }
+    }
+
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="p"></param>
+    /// <param name="element"></param>
+    void PannelMessage(int p, int element) {
+        var t = panels[p].transform.GetChild(0).GetComponent<Text>().text;
+        t = _testi.data[element].titolo;
+        t = _testi.data[element].testo;
     }
 
     // Update is called once per frame
