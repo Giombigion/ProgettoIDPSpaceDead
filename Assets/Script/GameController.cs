@@ -72,6 +72,7 @@ public class GameController : MonoBehaviour
             panels[4].SetActive(true);
             PlayerController.playercon.weaponEquipped = true;
         }
+
     }
 
 
@@ -82,9 +83,15 @@ public class GameController : MonoBehaviour
     /// <param name="element">Elementi nel pannello</param>
     public void PannelMessage(int p, int element, bool active) {
         panels[p].SetActive(active);
-        var t = panels[p].transform.GetChild(0).GetComponent<Text>().text;
-        t = _testi.data[element].titolo;
-        t = _testi.data[element].testo;
+        panels[p].transform.GetChild(0).GetComponent<Text>().text = _testi.data[element].titolo;
+
+        try
+        {
+            panels[p].transform.GetChild(1).GetComponent<Text>().text = _testi.data[element].testo;
+        }
+        catch {
+            print("Non esiste l'elemento per il testo");
+        }
     }
 
     // Update is called once per frame
