@@ -78,9 +78,10 @@ public class GameController : MonoBehaviour
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="p"></param>
-    /// <param name="element"></param>
-    void PannelMessage(int p, int element) {
+    /// <param name="p">Indice del pannello</param>
+    /// <param name="element">Elementi nel pannello</param>
+    public void PannelMessage(int p, int element, bool active) {
+        panels[p].SetActive(active);
         var t = panels[p].transform.GetChild(0).GetComponent<Text>().text;
         t = _testi.data[element].titolo;
         t = _testi.data[element].testo;
