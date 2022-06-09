@@ -4,6 +4,7 @@ using UnityEngine;
 
 [System.Serializable]
 public class TestiData{
+    public int id;
     public string titolo;
 
     [TextArea(5, 10)]
@@ -13,6 +14,6 @@ public class TestiData{
 public class Testi : MonoBehaviour
 {
 
-    public List<TestiData> data;
+    public List<TestiData> data = new List<TestiData>();
 
 }

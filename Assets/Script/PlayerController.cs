@@ -160,7 +160,8 @@ public class PlayerController : MonoBehaviour
         //Codice per l'ottenimento del guanto
         if (hit.gameObject.tag == "Gauntlet" && take == false)
         {
-            GameController.instance.panels[0].SetActive(true);
+            //GameController.instance.panels[0].SetActive(true);
+            GameController.instance.PannelMessage(0, 0, true);
             GameController.instance.state = GameState.take;
             take = true;
         }
