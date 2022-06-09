@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         //Se il componente GameMaster è settato sullo stato di Play, allora esegui il contenuto.
-        if ((GameController.instance.state == GameState.play || GameController.instance.state == GameState.take) || GameController.instance.state != GameState.tutorial)
+        if (GameController.instance.state == GameState.play || GameController.instance.state == GameState.take)
         {
             isGround = Physics.CheckSphere(raypoint.position, groundDistance, layer);
             Jump = Input.GetButtonDown("Jump");
@@ -92,10 +92,11 @@ public class PlayerController : MonoBehaviour
                 height = 0.5f;
                 runSpeed = 0.5f;
             }
-            else {
+            else
+            {
                 height = 2;
             }
-            height = Mathf.Lerp(height, controller.height,Time.deltaTime*2);
+            height = Mathf.Lerp(height, controller.height, Time.deltaTime * 2);
             controller.height = height;
             //end Cruch
 
@@ -129,15 +130,25 @@ public class PlayerController : MonoBehaviour
 
             Vector3 moveplayer = Vector3.forward * movements.z * speed * runSpeed + Vector3.right * movements.x * speedStrafe;
             moveplayer = transform.TransformDirection(moveplayer);
-            controller.Move(moveplayer*Time.deltaTime);
+            controller.Move(moveplayer * Time.deltaTime);
             //transform.rotation = Quaternion.Euler(0, rotX * rotSpeed , 0);
-
-            velocity.y += gravity * Time.deltaTime;
-            controller.Move(velocity * Time.deltaTime);
-            
             _gunScript.Shoot();
 
         }
+        else {
+
+            CharacterMove();
+        }
+    }
+
+
+    void CharacterMove() {
+
+        velocity.y += gravity * Time.deltaTime;
+        controller.Move(velocity * Time.deltaTime);
+
+        velocity.y += gravity * Time.deltaTime;
+        controller.Move(velocity * Time.deltaTime);
     }
 
     private void OnCollisionEnter(Collision hit)
