@@ -215,6 +215,8 @@ public class PlayerController : MonoBehaviour
             {
                 hit.transform.gameObject.GetComponent<ScriptPulsantePorta>().animPort.Play("PortaAperta", -1, 0);
             }
+
+            //GameController.instance.Keys[key] = false;
         }
 
         /*
