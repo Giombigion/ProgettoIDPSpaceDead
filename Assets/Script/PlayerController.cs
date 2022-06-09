@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         //Se il componente GameMaster è settato sullo stato di Play, allora esegui il contenuto.
-        if (GameController.instance.state == GameState.play || GameController.instance.state == GameState.take)
+        if ((GameController.instance.state == GameState.play || GameController.instance.state == GameState.take) || GameController.instance.state != GameState.tutorial)
         {
             isGround = Physics.CheckSphere(raypoint.position, groundDistance, layer);
             Jump = Input.GetButtonDown("Jump");
