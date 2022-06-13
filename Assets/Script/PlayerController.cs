@@ -231,6 +231,11 @@ public class PlayerController : MonoBehaviour
             GameController.instance.Keys[hit.gameObject.GetComponent<ScriptPulsantePorta>().ID] = false;
         }
 
+        if (hit.gameObject.tag == "TriggerNaveSorvolo")
+        {
+            hit.transform.gameObject.GetComponent<TriggerNaveSorvolo>().animShip.Play("AstronaveSorvolo", -1, 0);
+        }
+
         /*
         //Codice per la raccolta dei medikit
         if (hit.gameObject.tag == "Medikit")

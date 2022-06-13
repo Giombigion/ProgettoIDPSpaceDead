@@ -13,6 +13,7 @@ TagManager:
   - Laser
   - Alien
   - Collezzionabili
+  - TriggerNaveSorvolo
   layers:
   - Default
   - TransparentFX
