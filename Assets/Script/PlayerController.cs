@@ -199,7 +199,6 @@ public class PlayerController : MonoBehaviour
 
         GameController.instance.Keys[key] = true;
         Debug.Log("Chip");
-
     }
 
     private void OnTriggerEnter(Collider hit)
@@ -229,7 +228,7 @@ public class PlayerController : MonoBehaviour
                 hit.transform.gameObject.GetComponent<ScriptPulsantePorta>().animPort.Play("PortaAperta", -1, 0);
             }
 
-            //GameController.instance.Keys[key] = false;
+            GameController.instance.Keys[hit.gameObject.GetComponent<ScriptPulsantePorta>().ID] = false;
         }
 
         /*
