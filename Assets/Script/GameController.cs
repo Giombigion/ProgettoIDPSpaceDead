@@ -103,8 +103,15 @@ public class GameController : MonoBehaviour
     //Metodo per lo spostamento tra livelli
     public void initLevel(int id)
     {
-        ActiveLevel(id);
-        PlayerController.playercon.transform.position = startspawnlevels[id].position;
+        if (!PlayerController.playercon.weaponEquipped)
+        {
+            print("Ti serve il guanto per accedere all'area successiva");
+        }
+        else
+        {
+            ActiveLevel(id);
+            PlayerController.playercon.transform.position = startspawnlevels[id].position;
+        }
     }
 
     //Metodo per la comparsa/scomparsa dei livelli
@@ -191,10 +198,14 @@ public class GameController : MonoBehaviour
     {
 
         panels[5].SetActive(true);
+        PannelMessage(5, 1, true);
+        //panels[5].SetActive(true);
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             panels[5].SetActive(false);
+            PannelMessage(5, 1, false);
+            //panels[5].SetActive(false);
 
             //Disabilita il collider 
             //gauntlet2.GetComponent<BoxCollider>().enabled = false;
