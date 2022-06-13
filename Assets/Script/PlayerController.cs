@@ -261,10 +261,16 @@ public class PlayerController : MonoBehaviour
         //Codice per il teletrasporto a fine livello
         if (hit.gameObject.tag == "EndLevel")
         {
-            GetComponent<CharacterController>().enabled = false;
-            GameController.instance.idlevel += 1;
-            GameController.instance.initLevel(GameController.instance.idlevel);
-            GetComponent<CharacterController>().enabled = true;
+            if (weaponEquipped == true)
+            {
+                GetComponent<CharacterController>().enabled = false;
+                GameController.instance.idlevel += 1;
+                GameController.instance.initLevel(GameController.instance.idlevel);
+                GetComponent<CharacterController>().enabled = true;
+            }
+            else{
+                print("Ti serve il guanto per accedere all'area successiva");
+            }
         }
 
         //Codice per i check points

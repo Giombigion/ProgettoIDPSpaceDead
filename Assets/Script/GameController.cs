@@ -103,15 +103,8 @@ public class GameController : MonoBehaviour
     //Metodo per lo spostamento tra livelli
     public void initLevel(int id)
     {
-        if (!PlayerController.playercon.weaponEquipped)
-        {
-            print("Ti serve il guanto per accedere all'area successiva");
-        }
-        else
-        {
-            ActiveLevel(id);
-            PlayerController.playercon.transform.position = startspawnlevels[id].position;
-        }
+        ActiveLevel(id);
+        PlayerController.playercon.transform.position = startspawnlevels[id].position;
     }
 
     //Metodo per la comparsa/scomparsa dei livelli
