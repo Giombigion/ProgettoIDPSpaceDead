@@ -233,7 +233,8 @@ public class PlayerController : MonoBehaviour
 
         if (hit.gameObject.tag == "TriggerNaveSorvolo")
         {
-            hit.transform.gameObject.GetComponent<TriggerNaveSorvolo>().animShip.Play("AstronaveSorvolo", -1, 0);
+            hit.transform.gameObject.GetComponent<TriggerNaveSorvolo>().animShip01.Play("AstronaveSorvolo", -1, 0);
+            hit.transform.gameObject.GetComponent<TriggerNaveSorvolo>().animShip02.Play("AstronaveSorvolo", -1, 0);
         }
 
         /*

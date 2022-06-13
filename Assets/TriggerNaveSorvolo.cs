@@ -4,5 +4,6 @@ using UnityEngine;
 
 public class TriggerNaveSorvolo : MonoBehaviour
 {
-    public Animator animShip;
+    public Animator animShip01;
+    public Animator animShip02;
 }
