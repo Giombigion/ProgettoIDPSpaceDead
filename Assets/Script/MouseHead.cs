@@ -14,7 +14,10 @@ public class MouseHead : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        FPSCamera();
+        if (GameController.instance.state == GameState.play || GameController.instance.state == GameState.take)
+        {
+            FPSCamera();
+        }
     }
 
     void FPSCamera() {
