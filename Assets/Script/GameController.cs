@@ -190,14 +190,14 @@ public class GameController : MonoBehaviour
     public void _TUTORIAL()
     {
 
-        panels[5].SetActive(true);
-        PannelMessage(5, 1, true);
+        //panels[5].SetActive(true);
+        PannelMessage(0, 1, true);
         //panels[5].SetActive(true);
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            panels[5].SetActive(false);
-            PannelMessage(5, 1, false);
+            //panels[5].SetActive(false);
+            PannelMessage(0, 1, false);
             //panels[5].SetActive(false);
 
             //Disabilita il collider 
@@ -209,7 +209,7 @@ public class GameController : MonoBehaviour
 
             gauntlet2.SetActive(true);
             //PlayerController.playercon.take = false;
-            panels[0].SetActive(false);
+            //panels[0].SetActive(false);
             panels[1].SetActive(true);
             panels[4].SetActive(true);
 
