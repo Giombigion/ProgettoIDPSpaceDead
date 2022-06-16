@@ -99,7 +99,6 @@ public class BasicAlien : MonoBehaviour
     {
         Transform EnemyPaths = Paths[IDPaths].transform.GetChild(contatorewaypoints);
         distanzaWP = Vector3.Distance(transform.position, EnemyPaths.position);
-        
 
         if (distanzaWP < 2)
         {
@@ -121,7 +120,6 @@ public class BasicAlien : MonoBehaviour
 
     }
 
-
     private Quaternion _rot;
     private Vector3 _direction;
     /// <summary>
@@ -134,6 +132,8 @@ public class BasicAlien : MonoBehaviour
         _rot = Quaternion.LookRotation(_direction);
         agent.transform.rotation = Quaternion.Slerp(agent.transform.rotation, _rot, Time.deltaTime * speed);
     }
+
+
 
     //Codice per l'attacco dei Nemici
     void Attack()
