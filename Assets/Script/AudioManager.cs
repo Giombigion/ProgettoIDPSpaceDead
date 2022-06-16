@@ -37,10 +37,11 @@ public class AudioManager : MonoBehaviour
     /// <param name="channel">ID CLIP</param>
     /// <param name="v">Volume (0-1)</param>
     /// <param name="spatial">SpatialBlend (0-1) 0=2D - 1=3D</param>
-    public void _playAudio(int channel, float v, int spatial)
+    public void _playAudio(int channel, float v, int spatial, bool isLoop)
     {
         audio_source[channel].Play();
         audio_source[channel].volume = v;
+        audio_source[channel].loop = isLoop;
         audio_source[channel].spatialBlend = spatial;
     }
 }
