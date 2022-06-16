@@ -43,6 +43,8 @@ public class PlayerController : MonoBehaviour
     float height;
     float runSpeed;
 
+    public bool playSound;
+
     [SerializeField] GunScript _gunScript;
 
     //Variabili per la gestione dei chip
@@ -163,7 +165,6 @@ public class PlayerController : MonoBehaviour
             //GameController.instance.panels[0].SetActive(true);
             GameController.instance.PannelMessage(0, 0, true);
             GameController.instance.state = GameState.take;
-            AudioManager.instance._playAudio(0, 1f, 0);
             take = true;
         }
 
@@ -178,7 +179,6 @@ public class PlayerController : MonoBehaviour
         {
             GameController.instance.panels[0].SetActive(false);
             GameController.instance.state = GameState.play;
-
             take = false;
         }
     }
@@ -205,6 +205,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider hit)
     {
+
         if (hit.gameObject.tag == "Collezzionabili")
         {
             hit.gameObject.GetComponent<BoxCollider>().enabled = false;
