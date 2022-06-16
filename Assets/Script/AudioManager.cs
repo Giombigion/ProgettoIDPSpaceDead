@@ -7,6 +7,8 @@ public class AudioManager : MonoBehaviour
     public static AudioManager instance;
 
     public AudioClip[] clip;
+
+    //[HideInInspector]
     public List<AudioSource> audio_source = new List<AudioSource>();
 
     // Start is called before the first frame update

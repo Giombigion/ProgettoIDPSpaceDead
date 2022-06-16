@@ -177,6 +177,7 @@ public class PlayerController : MonoBehaviour
         {
             GameController.instance.panels[0].SetActive(false);
             GameController.instance.state = GameState.play;
+            AudioManager.instance._playAudio(0, 1f, 0);
             take = false;
         }
     }
