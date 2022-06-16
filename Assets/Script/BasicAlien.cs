@@ -80,10 +80,9 @@ public class BasicAlien : MonoBehaviour
                 }
                 
             }
-                       
 
-            var changeAnim = Vector3.Dot(agent.velocity, agent.transform.forward);
-            animazione.SetFloat("Blend", changeAnim,0.2f,Time.deltaTime);
+            var changeAnim = Vector3.Dot(agent.transform.forward, agent.velocity);
+            animazione.SetFloat("Blend", changeAnim, 0.16f, Time.deltaTime);
 
         }
     }
@@ -117,16 +116,32 @@ public class BasicAlien : MonoBehaviour
                 }
             }
         }
+        rotateTo(EnemyPaths.position, 4);
         agent.SetDestination(EnemyPaths.position);
 
     }
-    
+
+
+    private Quaternion _rot;
+    private Vector3 _direction;
+    /// <summary>
+    /// Ruota il gameobject in direzaione di un punto.
+    /// </summary>
+    /// <param name="t">destinazione</param>
+    /// <param name="speed"> velocità di rotazione</param>
+    void rotateTo(Vector3 t,float speed) {
+        _direction = (t - agent.transform.position).normalized;
+        _rot = Quaternion.LookRotation(_direction);
+        agent.transform.rotation = Quaternion.Slerp(agent.transform.rotation, _rot, Time.deltaTime * speed);
+    }
 
     //Codice per l'attacco dei Nemici
     void Attack()
     {
-        animazione.SetFloat("Blend", 1f);
+
+
         agent.speed = 3;
+        rotateTo(target.position, 4);
         agent.SetDestination(target.position);
         
     }
