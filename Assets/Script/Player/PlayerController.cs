@@ -231,10 +231,15 @@ public class PlayerController : MonoBehaviour
         {
             if (GameController.instance.Keys[hit.gameObject.GetComponent<ScriptPulsantePorta>().ID])
             {
+                audioController.Play("PortaAperta");
                 hit.transform.gameObject.GetComponent<ScriptPulsantePorta>().animPort.Play("PortaAperta", -1, 0);
+                GameController.instance.Keys[hit.gameObject.GetComponent<ScriptPulsantePorta>().ID] = false;
+                Destroy(hit.gameObject.GetComponent<Collider>());
             }
-
-            GameController.instance.Keys[hit.gameObject.GetComponent<ScriptPulsantePorta>().ID] = false;
+            else
+            {
+                audioController.Play("PortaChiusa");
+            }
         }
 
         if (hit.gameObject.tag == "TriggerNaveSorvolo")
