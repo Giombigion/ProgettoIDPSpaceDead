@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
     public void Awake()
     {
         playercon = this;
-        otherAnimator = otherObject.GetComponent<Animator>();
+        otherAnimator = otherObject.GetComponent<Animator>();  
     }
 
     private void Start()
@@ -62,6 +62,7 @@ public class PlayerController : MonoBehaviour
         //anim = GetComponent<Animator>();
         controller = GetComponent<CharacterController>();
         chipscript = new ChipScript();
+        audioController.audioSources[1].Play();
 
     }
 
@@ -86,6 +87,7 @@ public class PlayerController : MonoBehaviour
             else
             {
                 runSpeed = 1;
+                audioController.Play("PassiPlayer");
             }
             //end RUN
 
@@ -114,7 +116,7 @@ public class PlayerController : MonoBehaviour
             //Imposta le animazioni di camminata/corsa
             if (isGround && velocity.y < 0)
             {
-                //anim.SetBool("isjump", false);
+                //anim.SetBool("isjump", false);  
                 velocity.y = -2f;
             }
 

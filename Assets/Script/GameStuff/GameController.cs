@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour
 {
     public static GameController instance;
+    public AudioController audioController;
     public GameState state;
     public GameObject[] panels;
     [SerializeField] Testi _testi;
@@ -183,19 +184,21 @@ public class GameController : MonoBehaviour
         {
             Destroy(gauntlet.gameObject);
 
+            audioController.audioSources[1].Stop();
+            audioController.Play("TestoGuanto");
             state = GameState.tutorial;
         }
     }
 
     public void _TUTORIAL()
     {
-
         //panels[5].SetActive(true);
         PannelMessage(0, 1, true);
         //panels[5].SetActive(true);
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            audioController.Play("EquipaggiamentoGuanto"); //QUI NON VA BENE QUESTO, PERCHE' VERRA' ESEGUITO OGNI VOLTA CHE SI ESCE DA UN PANNELLO. PERO' FUNZIONA SOLO SE MESSO QUI. DA CONTROLLARE
             //panels[5].SetActive(false);
             PannelMessage(0, 1, false);
             //panels[5].SetActive(false);
