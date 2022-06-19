@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
 
    [SerializeField] GameObject otherObject; //Inserisco il guanto.
 
+    public GameObject Teletrasporto;
+
     //Variabili per il movimento
     public float speed = 12f; //Imposto la forza con cui il Players si muove orizontalmente.
     public float speedStrafe = 12;
@@ -289,10 +291,14 @@ public class PlayerController : MonoBehaviour
         {
             if (weaponEquipped == true)
             {
-                GetComponent<CharacterController>().enabled = false;
+                //QUI E' NECESSARIO FARE CHE UNA VOLTA TOCCATO IL CORPO, IL GIOCATORE NON POSSA PIU' MUOVERSI, PARTA l'ANIMAZIONE DELLE SCINTILLE ED IL SUONO. QUANDO IL SUONO FINISCE IL GIOCATORE VIENE TELETRASPORTATO.
+                Teletrasporto.SetActive(true);
+                audioController.Play("Teletrasporto");
+
+                /*GetComponent<CharacterController>().enabled = false;
                 GameController.instance.idlevel += 1;
                 GameController.instance.initLevel(GameController.instance.idlevel);
-                GetComponent<CharacterController>().enabled = true;
+                GetComponent<CharacterController>().enabled = true;*/
             }
             else{
                 print("Ti serve il guanto per accedere all'area successiva");
