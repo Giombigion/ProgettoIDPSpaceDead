@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     float asseZ;
     float asseX;
     float rotX = 90;
-
+    public float TakeDemage = 1f;
     //Variabile di controllo per l'interazione col guanto
     public bool take = false;
 
@@ -173,7 +173,7 @@ public class PlayerController : MonoBehaviour
             take = true;
         }
 
-    }
+        }
 
     private void OnCollisionExit(Collision hit)
     {
@@ -227,6 +227,13 @@ public class PlayerController : MonoBehaviour
                 Destroy(hit.gameObject);
                 GameController.instance.ammoUp(Obj.maxammo);
             }
+        }
+
+        if (hit.gameObject.tag == "Laser")
+        {
+            GameController.instance.TakeDemage(1);
+            
+
         }
 
         if (hit.gameObject.tag == "PulsantePorta")
