@@ -15,6 +15,7 @@ TagManager:
   - Collezzionabili
   - TriggerNaveSorvolo
   - TriggerMotherSpaceshipSound
+  - Boss
   layers:
   - Default
   - TransparentFX
