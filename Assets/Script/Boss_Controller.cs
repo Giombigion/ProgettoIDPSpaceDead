@@ -82,7 +82,8 @@ public class Boss_Controller : MonoBehaviour
             }
 
             var changeAnim = Vector3.Dot(agent.transform.forward, agent.velocity);
-            animazione.SetFloat("Blend", changeAnim, 0.16f, Time.deltaTime);
+            changeAnim = Mathf.Clamp(changeAnim, 0, 1);
+            animazione.SetFloat("Chase", changeAnim, 0.16f, Time.deltaTime);
 
         }
     }
