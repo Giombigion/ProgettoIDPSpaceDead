@@ -145,7 +145,7 @@ public class PlayerController : MonoBehaviour
             if (Mathf.Abs(asseZ) > 0 && isGround)
             {
 
-                AudioTimer(0.5f);
+                AudioTimer(0.5f,"Playerpassi");
 
             }
 
@@ -157,11 +157,11 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    void AudioTimer(float everyTIme) {
+    void AudioTimer(float everyTIme, string audioname) {
         t+=Time.deltaTime;
         if (t > everyTIme) {
             t = 0;
-            audioController.Play("PassiPlayer");
+            audioController.Play(audioname);
         }
     }
 
