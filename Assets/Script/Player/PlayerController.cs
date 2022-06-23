@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     float asseZ;
     float asseX;
     float rotX = 90;
-    public float TakeDemage = 1f;
+    public float TakeDemage = 2f;
     //Variabile di controllo per l'interazione col guanto
     public bool take = false;
 
@@ -231,7 +231,7 @@ public class PlayerController : MonoBehaviour
 
         if (hit.gameObject.tag == "Laser")
         {
-            GameController.instance.TakeDemage(1);
+            GameController.instance.TakeDemage(2);
             
 
         }
