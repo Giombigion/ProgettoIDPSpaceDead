@@ -48,6 +48,10 @@ public class PlayerController : MonoBehaviour
 
     public bool playSound;
 
+    float t;
+
+    bool CheckTp;
+
     [SerializeField] GunScript _gunScript;
 
     //Variabili per la gestione dei chip
@@ -138,7 +142,7 @@ public class PlayerController : MonoBehaviour
             Vector3 moveplayer = Vector3.forward * movements.z * speed * runSpeed + Vector3.right * movements.x * speedStrafe;
             moveplayer = transform.TransformDirection(moveplayer);
             controller.Move(moveplayer * Time.deltaTime);
-            //transform.rotation = Quaternion.Euler(0, rotX * rotSpeed , 0);
+            //transform.rotation = Quaternion.Euler(0, rotX * rotSpeed , 0);*
             _gunScript.Shoot();
             CharacterMove();
 
@@ -155,12 +159,15 @@ public class PlayerController : MonoBehaviour
                     audioController.AudioTimer(Random.Range(0.35f, 0.55f), "PassoDX");
                 }
             }
-
-
         }
         else {
 
             CharacterMove();
+        }
+
+        if(CheckTp == true)
+        {
+            TpForSpaceship(4);
         }
     }
 
@@ -323,14 +330,12 @@ public class PlayerController : MonoBehaviour
         {
             if (weaponEquipped == true)
             {
-                //QUI E' NECESSARIO FARE CHE UNA VOLTA TOCCATO IL CORPO, IL GIOCATORE NON POSSA PIU' MUOVERSI, PARTA l'ANIMAZIONE DELLE SCINTILLE ED IL SUONO. QUANDO IL SUONO FINISCE IL GIOCATORE VIENE TELETRASPORTATO.
                 Teletrasporto.SetActive(true);
                 audioController.Play("Teletrasporto");
+                //Player viene bloccato
 
-                /*GetComponent<CharacterController>().enabled = false;
-                GameController.instance.idlevel += 1;
-                GameController.instance.initLevel(GameController.instance.idlevel);
-                GetComponent<CharacterController>().enabled = true;*/
+                CheckTp = true;
+                
             }
             else{
                 print("Ti serve il guanto per accedere all'area successiva");
@@ -349,4 +354,17 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    public void TpForSpaceship(float waitingTime)
+    {
+        t += Time.deltaTime;
+        if (t > waitingTime) //Aspetta il tempo di esecuzione della clip audio
+        {
+            GetComponent<CharacterController>().enabled = false;
+            GameController.instance.idlevel += 1;
+            GameController.instance.initLevel(GameController.instance.idlevel);
+            GetComponent<CharacterController>().enabled = true;
+
+            CheckTp = false;
+        }
+    }
 }
