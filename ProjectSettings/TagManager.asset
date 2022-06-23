@@ -16,6 +16,7 @@ TagManager:
   - TriggerNaveSorvolo
   - TriggerMotherSpaceshipSound
   - Boss
+  - Crystal
   layers:
   - Default
   - TransparentFX

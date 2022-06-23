@@ -228,6 +228,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void OnTriggerStay(Collider hit)
+    {
+        if (hit.gameObject.tag == "Crystal")
+        {
+            print(hit.gameObject.tag);
+            Crystal.cr.crHeal();
+        }
+    }
+
+
     public void Key(int key)
     {
         print(chipCounter);
