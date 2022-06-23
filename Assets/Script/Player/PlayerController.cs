@@ -68,8 +68,8 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    float t = 0;
-    // Update is called once per frame
+ 
+   // Update is called once per frame
     void Update()
     {
         //Se il componente GameMaster è settato sullo stato di Play, allora esegui il contenuto.
@@ -142,12 +142,20 @@ public class PlayerController : MonoBehaviour
             _gunScript.Shoot();
             CharacterMove();
 
+
+            // GESTIONE PASSI
             if (Mathf.Abs(asseZ) > 0 && isGround)
             {
-
-                AudioTimer(0.5f,"Playerpassi");
-
+                if (PassoAlternato(moveplayer) > 0)
+                {
+                    audioController.AudioTimer(0.5f, "PassoSX");
+                }
+                else
+                {
+                    audioController.AudioTimer(0.5f, "PassoDX");
+                }
             }
+
 
         }
         else {
@@ -157,12 +165,13 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    void AudioTimer(float everyTIme, string audioname) {
-        t+=Time.deltaTime;
-        if (t > everyTIme) {
-            t = 0;
-            audioController.Play(audioname);
-        }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="vettore"></param>
+    /// <returns></returns>
+    int PassoAlternato(Vector3 vettore) {
+        return (int)(1 + Mathf.Abs(vettore.z)) % 2;
     }
 
 
