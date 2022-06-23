@@ -148,11 +148,11 @@ public class PlayerController : MonoBehaviour
             {
                 if (PassoAlternato(moveplayer) > 0)
                 {
-                    audioController.AudioTimer(0.5f, "PassoSX");
+                    audioController.AudioTimer(Random.Range(0.4f, 0.6f), "PassoSX");
                 }
                 else
                 {
-                    audioController.AudioTimer(0.5f, "PassoDX");
+                    audioController.AudioTimer(Random.Range(0.35f, 0.55f), "PassoDX");
                 }
             }
 
