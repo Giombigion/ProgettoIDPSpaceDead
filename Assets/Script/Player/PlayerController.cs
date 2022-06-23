@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     public float gravity = -9.81f; //Imposto una forza che da una spinta verso il basso al Player, simulando la gravità.
     public float jumpHeight = 3f; //Imposto la forza che da una spinta verso l'alto al Player.
     public float rotSpeed; //imposto la forza con cui il Player ruota sul suo asse.
-    public float groundDistance = 0.4f;
+    public float groundDistance = 0.55f;
     float asseZ;
     float asseX;
     float rotX = 90;
@@ -88,8 +88,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                runSpeed = 1;
-                audioController.Play("PassiPlayer");
+                runSpeed = 1; 
             }
             //end RUN
 
@@ -141,6 +140,12 @@ public class PlayerController : MonoBehaviour
             //transform.rotation = Quaternion.Euler(0, rotX * rotSpeed , 0);
             _gunScript.Shoot();
             CharacterMove();
+
+            if (Mathf.Abs(moveplayer.z) > 0 && isGround)
+            {
+                audioController.Play("PassiPlayer");
+
+            }
 
         }
         else {
