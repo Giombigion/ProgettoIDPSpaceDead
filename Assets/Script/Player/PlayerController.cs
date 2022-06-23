@@ -68,6 +68,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    float t = 0;
     // Update is called once per frame
     void Update()
     {
@@ -141,9 +142,10 @@ public class PlayerController : MonoBehaviour
             _gunScript.Shoot();
             CharacterMove();
 
-            if (Mathf.Abs(moveplayer.z) > 0 && isGround)
+            if (Mathf.Abs(asseZ) > 0 && isGround)
             {
-                audioController.Play("PassiPlayer");
+
+                AudioTimer(0.5f);
 
             }
 
@@ -151,6 +153,15 @@ public class PlayerController : MonoBehaviour
         else {
 
             CharacterMove();
+        }
+    }
+
+
+    void AudioTimer(float everyTIme) {
+        t+=Time.deltaTime;
+        if (t > everyTIme) {
+            t = 0;
+            audioController.Play("PassiPlayer");
         }
     }
 
