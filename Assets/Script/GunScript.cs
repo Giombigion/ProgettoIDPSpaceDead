@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class GunScript : MonoBehaviour
 {
-    /*Animator anim; //Assegno un nome al componente Animator.
+    Animator anim; //Assegno un nome al componente Animator.
     float asseZ;
-    float asseX;*/
+    float asseX;
 
     //Variabili per la gestione dello sparo
     [SerializeField] float maxTime = 0.5f;
@@ -17,24 +17,24 @@ public class GunScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //anim = GetComponent<Animator>();
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        /*asseX = Input.GetAxis("Horizontal");
+        asseX = Input.GetAxis("Horizontal");
         asseZ = Input.GetAxis("Vertical");
 
         Vector3 movements = new Vector3(asseX, 0, asseZ);
 
+        float animSpeedZ = Vector3.Dot(movements, PlayerController.playercon.transform.forward);
         float animSpeedX = Vector3.Dot(movements, PlayerController.playercon.transform.right);
-        float animSpeedY = Vector3.Dot(movements, PlayerController.playercon.transform.forward);
 
         //animator con BLEND TREE
-        anim.SetFloat("yArma", animSpeedY, 0.2f, Time.deltaTime);
-        anim.SetFloat("xArma", animSpeedX, 0.2f, Time.deltaTime);*/
+        anim.SetFloat("xArma", animSpeedZ, 0.2f, Time.deltaTime);
+        anim.SetFloat("zArma", animSpeedZ, 0.2f, Time.deltaTime);
 
     }
 
