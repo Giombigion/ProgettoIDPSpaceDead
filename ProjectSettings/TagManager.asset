@@ -17,6 +17,7 @@ TagManager:
   - TriggerMotherSpaceshipSound
   - Boss
   - Crystal
+  - CheckPoint
   layers:
   - Default
   - TransparentFX

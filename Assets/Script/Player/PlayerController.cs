@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
    [SerializeField] GameObject otherObject; //Inserisco il guanto.
 
     public GameObject Teletrasporto;
+    public GameObject CameraPlayer;
 
     //Variabili per il movimento
     public float speed = 12f; //Imposto la forza con cui il Players si muove orizontalmente.
@@ -340,6 +341,7 @@ public class PlayerController : MonoBehaviour
         {
             if (weaponEquipped == true)
             {
+                GameController.instance.state = GameState.idle;
                 Teletrasporto.SetActive(true);
                 audioController.Play("Teletrasporto");
                 //Player viene bloccato
@@ -355,6 +357,7 @@ public class PlayerController : MonoBehaviour
         //Codice per i check points
         if (hit.gameObject.tag == "CheckPoint")
         {
+            GameController.instance.state = GameState.play;
             checkcounter += 1;
             print(checkcounter);
             GameController.instance.startspawnlevels[0].position = GameController.instance.checkPoints[checkcounter].position;
@@ -365,7 +368,7 @@ public class PlayerController : MonoBehaviour
     }
 
     public void TpForSpaceship(float waitingTime)
-    {
+    {   
         t += Time.deltaTime;
         if (t > waitingTime) //Aspetta il tempo di esecuzione della clip audio
         {
