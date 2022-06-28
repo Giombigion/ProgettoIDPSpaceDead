@@ -347,6 +347,7 @@ public class PlayerController : MonoBehaviour
                 GameController.instance.state = GameState.idle;
                 Teletrasporto.SetActive(true);
                 audioController.Play("Teletrasporto");
+                audioController.Stop("Rain_Terra");
                 //Player viene bloccato
 
                 CheckTp = true;

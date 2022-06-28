@@ -60,6 +60,8 @@ public class GameController : MonoBehaviour
         //Sceglie lo stato che permette di giocare
         state = GameState.play;
 
+        audioController.Play("Rain_Terra");
+
         //Disattiva all'avvio tutti i panel eccetto quello della stamina
         foreach (GameObject panel in panels)
         {
