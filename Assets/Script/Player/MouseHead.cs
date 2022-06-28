@@ -10,7 +10,6 @@ public class MouseHead : MonoBehaviour
     [SerializeField] float MaxYAngle;
     float xm, ym;
 
-
     // Update is called once per frame
     void Update()
     {

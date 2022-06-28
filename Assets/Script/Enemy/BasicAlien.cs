@@ -7,27 +7,28 @@ public class BasicAlien : MonoBehaviour
 {
     [SerializeField] Transform target;
     [SerializeField] float force;
-    Rigidbody rb;
+
     public NavMeshAgent agent;
+
     [SerializeField] Transform[] Paths;
     [SerializeField] int IDPaths;
-    Animator animazione;
 
+    Animator animazione;
 
     float distanzaWP;
     int contatorewaypoints;
+
     [SerializeField] Transform raypointfront;
     [SerializeField] Transform raypointback;
+
     [SerializeField] float lengthsphere;
     [SerializeField] bool isHuman;
     [SerializeField] float distanza;
 
     float timer;
 
-    
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
         animazione = GetComponent<Animator>();
     }
@@ -37,9 +38,6 @@ public class BasicAlien : MonoBehaviour
     {
         if (GameController.instance.state == GameState.play)
         {
-            //animazione.SetBool("isWalking", true);
-
- 
             //Spheracast per il controllo della distanza tra il nemico e i vari oggetti
             RaycastHit hit;
             if (Physics.SphereCast(raypointfront.position, 1, transform.forward, out hit, lengthsphere))
@@ -56,9 +54,7 @@ public class BasicAlien : MonoBehaviour
                 print(hit.transform.gameObject.layer);
             }
 
-
             //Angolo di vista e azioni
-
             distanza = Vector3.Distance(transform.position, target.transform.position);
 
             if (isFrontOff (270) && isHuman == true)
@@ -83,7 +79,6 @@ public class BasicAlien : MonoBehaviour
 
             var changeAnim = Vector3.Dot(agent.transform.forward, agent.velocity);
             animazione.SetFloat("Blend", changeAnim, 0.16f, Time.deltaTime);
-
         }
     }
     void OnDrawGizmos()
@@ -92,7 +87,6 @@ public class BasicAlien : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(raypointfront.position, lengthsphere);
     }
-
 
     //Codice per la ronda dei Nemici
     void Patrol()
@@ -117,7 +111,6 @@ public class BasicAlien : MonoBehaviour
         }
         rotateTo(EnemyPaths.position, 4);
         agent.SetDestination(EnemyPaths.position);
-
     }
 
     private Quaternion _rot;
@@ -127,28 +120,25 @@ public class BasicAlien : MonoBehaviour
     /// </summary>
     /// <param name="t">destinazione</param>
     /// <param name="speed"> velocità di rotazione</param>
-    void rotateTo(Vector3 t,float speed) {
+    void rotateTo(Vector3 t,float speed) 
+    {
         _direction = (t - agent.transform.position).normalized;
         _rot = Quaternion.LookRotation(_direction);
         agent.transform.rotation = Quaternion.Slerp(agent.transform.rotation, _rot, Time.deltaTime * speed);
     }
-
-
 
     //Codice per l'attacco dei Nemici
     void Attack()
     {
         agent.speed = 10;
         rotateTo(target.position, 4);
-        agent.SetDestination(target.position);
-        
+        agent.SetDestination(target.position);     
     }
 
     bool isFrontOff(float visuale)
     {
         var direzioneTarget = (transform.position - target.transform.position).normalized;
         var angle = Mathf.Acos(Vector3.Dot(transform.forward.normalized, direzioneTarget)) * 100;
-        //print("DEBUG ANGLE:" + angle);
         if (angle < visuale)
         {
             return false;

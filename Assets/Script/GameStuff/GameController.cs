@@ -6,10 +6,16 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour
 {
     public static GameController instance;
+
     public AudioController audioController;
+
     public GameState state;
+
     public GameObject[] panels;
     [SerializeField] Testi _testi;
+
+    //Variabile per la gestione dei Chip
+    public GameObject[] chipUI;
 
     [SerializeField] public int idlevel; //Variabile per l'assegnazione di un valore ad ogni livello
 
@@ -26,10 +32,6 @@ public class GameController : MonoBehaviour
     [SerializeField] public Text StaminaData;
     public int currentStamina;
 
-    //Variabili per la gestione delle munizioni
-    [SerializeField] public Text AmmoData;
-    public int currentAmmo = 1;
-
     [SerializeField] bool isMouseShowed;
 
     public Transform[] startspawnlevels; //Permette di far spawnare il palyer nello spawn di inzio livello
@@ -38,9 +40,6 @@ public class GameController : MonoBehaviour
     //Variaibli per l'attivazione del guanto
     [SerializeField] GameObject gauntlet;
     [SerializeField] public GameObject gauntlet2;
-
-    //Variabile per la gestione dei Chip
-    public GameObject[] chipUI;
 
     [Range(0,15)]
     public float InteractiveOBJDistance;
@@ -60,7 +59,7 @@ public class GameController : MonoBehaviour
         //Sceglie lo stato che permette di giocare
         state = GameState.play;
 
-        audioController.Play("Rain_Terra");
+        audioController.Play("Rain_Terra"); //Spostare in un metodo.
 
         //Disattiva all'avvio tutti i panel eccetto quello della stamina
         foreach (GameObject panel in panels)
@@ -75,16 +74,21 @@ public class GameController : MonoBehaviour
             panels[4].SetActive(true);
             PlayerController.playercon.weaponEquipped = true;
         }
-
     }
 
+    // Update is called once per frame
+    void Update()
+    {
+        StateMachine();
+    }
 
     /// <summary>
     /// 
     /// </summary>
     /// <param name="p">Indice del pannello</param>
     /// <param name="element">Elementi nel pannello</param>
-    public void PannelMessage(int p, int element, bool active) {
+    public void PannelMessage(int p, int element, bool active)
+    {
         panels[p].SetActive(active);
         panels[p].transform.GetChild(0).GetComponent<Text>().text = _testi.data[element].titolo;
 
@@ -92,15 +96,10 @@ public class GameController : MonoBehaviour
         {
             panels[p].transform.GetChild(1).GetComponent<Text>().text = _testi.data[element].testo;
         }
-        catch {
+        catch
+        {
             print("Non esiste l'elemento per il testo");
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        StateMachine();
     }
 
     //Metodo per lo spostamento tra livelli
@@ -117,7 +116,6 @@ public class GameController : MonoBehaviour
         {
             level.SetActive(false);
         }
-
 
         levels[id].SetActive(true);
     }
@@ -138,14 +136,6 @@ public class GameController : MonoBehaviour
     {
         currentStamina -= demageAmount;
         StaminaData.text = currentStamina.ToString();
-   
-    }
-
-    //Metodo che aumenta le munizioni disponibili del player
-    public void ammoUp(int a)
-    {
-        currentAmmo += a;
-        AmmoData.text = currentAmmo.ToString();
     }
 
     //Metodo che mostra a schermo i chip raccolti
@@ -159,9 +149,23 @@ public class GameController : MonoBehaviour
 
         //Codice che gestisce il numero di chip visibili a schermo
         chipUI[chipCounter].SetActive(true);
-
     }
 
+    void hidemouse()
+    {
+        if (isMouseShowed)
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        else
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+    }
+
+    //-----STATI DI GIOCO----------------------------------------------------------------------------------------
     //Metodo dedicato allo stato di IDLE
     public void _IDLE()
     {
@@ -201,49 +205,23 @@ public class GameController : MonoBehaviour
 
     public void _TUTORIAL()
     {
-        //panels[5].SetActive(true);
         PannelMessage(0, 1, true);
-        //panels[5].SetActive(true);
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             audioController.Play("EquipaggiamentoGuanto"); //QUI NON VA BENE QUESTO, PERCHE' VERRA' ESEGUITO OGNI VOLTA CHE SI ESCE DA UN PANNELLO. PERO' FUNZIONA SOLO SE MESSO QUI. DA CONTROLLARE
-            //panels[5].SetActive(false);
             PannelMessage(0, 1, false);
-            //panels[5].SetActive(false);
-
-            //Disabilita il collider 
-            //gauntlet2.GetComponent<BoxCollider>().enabled = false;
 
             //Distrugge il collider;
             Destroy(gauntlet2.GetComponent<BoxCollider>());
 
-
             gauntlet2.SetActive(true);
-            //PlayerController.playercon.take = false;
-            //panels[0].SetActive(false);
             panels[1].SetActive(true);
             panels[4].SetActive(true);
-
 
             PlayerController.playercon.weaponEquipped = true;
 
             state = GameState.play;
-
-        }
-    }
-
-    void hidemouse()
-    {
-        if (isMouseShowed)
-        {
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
-        }
-        else
-        {
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
         }
     }
 

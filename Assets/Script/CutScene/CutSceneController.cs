@@ -5,6 +5,8 @@ using UnityEngine.Playables;
 
 public class CutSceneController : MonoBehaviour
 {
+    public static CutSceneController controller;
+
     [SerializeField] public GameObject[] cutscenes;
 
     public KeyCode key;
@@ -12,7 +14,6 @@ public class CutSceneController : MonoBehaviour
     [SerializeField] private PlayableDirector introCutscene = null;
     [SerializeField] public double skiptime = 50f;
 
-    public static CutSceneController controller;
     // Start is called before the first frame update
     void Start()
     {

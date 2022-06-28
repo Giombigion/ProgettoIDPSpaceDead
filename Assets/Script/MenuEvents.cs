@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class MenuEvents : MonoBehaviour
 {
 
-    
     public void _onPlay(string scenename) {
 
         print("inizio gioco");

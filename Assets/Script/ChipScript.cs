@@ -5,5 +5,4 @@ using UnityEngine;
 public class ChipScript : MonoBehaviour
 {
     public int keyID;
-
 }

@@ -7,6 +7,7 @@ public class AudioController : MonoBehaviour
     public Sound[] sounds;
     public AudioSource[] audioSources;
     float t;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -42,7 +43,6 @@ public class AudioController : MonoBehaviour
         }
         s.source.Stop();
     }
-
 
     public void AudioTimer(float everyTIme, string audioname)
     {

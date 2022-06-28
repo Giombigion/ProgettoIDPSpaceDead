@@ -6,9 +6,9 @@ public class PlayerController : MonoBehaviour
 {
     Animator otherAnimator; //Assegno un nome al componente Animator del guanto.
     CharacterController controller; //Assegno un nome al componente CharacterController.
-    public AudioController audioController;
+    public static PlayerController playercon;
 
-    ChipScript chipscript;
+    public AudioController audioController;
 
    [SerializeField] GameObject otherObject; //Inserisco il guanto.
 
@@ -24,35 +24,30 @@ public class PlayerController : MonoBehaviour
     public float groundDistance = 0.55f;
     float asseZ;
     float asseX;
-    float rotX = 90;
+
+    //Danno dei laser al giocatore.
     public float TakeDemage = 2f;
+
     //Variabile di controllo per l'interazione col guanto
     public bool take = false;
 
-    //Varibili per il raycast.
+    //Varibili per il raycast per il controllo del terrenno sotto il gicatore.
     public Transform raypoint;
-    bool Jump; //Variabile bool per il salto = variabile vera o falsa.
-    [SerializeField] bool isGround;
-
     public LayerMask layer;
     Vector3 velocity;
 
-    public static PlayerController playercon;
+    bool Jump; //Variabile bool per il salto = variabile vera o falsa.
+    [SerializeField] bool isGround;
 
     [SerializeField] int checkcounter; //Variabile per il controllo dei chekpoints
 
     //Variabili per la gestione dello sparo
-    float timer;
     public bool weaponEquipped;
     float height;
     float runSpeed;
-
     public bool playSound;
-
     float t;
-
     bool CheckTp;
-
     [SerializeField] GunScript _gunScript;
 
     //Variabili per la gestione dei chip
@@ -66,13 +61,9 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        //anim = GetComponent<Animator>();
         controller = GetComponent<CharacterController>();
-        chipscript = new ChipScript();
         audioController.audioSources[1].Play();
-
     }
-
  
    // Update is called once per frame
     void Update()
@@ -82,7 +73,6 @@ public class PlayerController : MonoBehaviour
         {
             isGround = Physics.CheckSphere(raypoint.position, groundDistance, layer);
             Jump = Input.GetButtonDown("Jump");
-
 
             var run = Input.GetKey(KeyCode.LeftShift);
             var cruch = Input.GetKey(KeyCode.LeftControl);
@@ -117,39 +107,28 @@ public class PlayerController : MonoBehaviour
             if (Jump && isGround)
             {
                 velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
-                //anim.SetBool("isjump", true);
             }
 
             //Imposta le animazioni di camminata/corsa
             if (isGround && velocity.y < 0)
-            {
-                //anim.SetBool("isjump", false);  
+            { 
                 velocity.y = -2f;
             }
 
             asseX = Input.GetAxis("Horizontal");
-            //rotX += asseX;
             asseZ = Input.GetAxis("Vertical");
 
             Vector3 movements = new Vector3(asseX, 0, asseZ);
-
-            //float animSpeedX = Vector3.Dot(movements, controller.transform.right);
-            //float animSpeedY = Vector3.Dot(movements, controller.transform.forward);
             float sZarma = Vector3.Dot(movements, controller.transform.forward);
 
             //animator con BLEND TREE
             otherAnimator.SetFloat("zArma", sZarma, 0.2f, Time.deltaTime);
-            //otherAnimator.SetFloat("xArma", animSpeedX, 0.2f, Time.deltaTime);
-
-       
 
             Vector3 moveplayer = Vector3.forward * movements.z * speed * runSpeed + Vector3.right * movements.x * speedStrafe;
             moveplayer = transform.TransformDirection(moveplayer);
             controller.Move(moveplayer * Time.deltaTime);
-            //transform.rotation = Quaternion.Euler(0, rotX * rotSpeed , 0);*
             _gunScript.Shoot();
             CharacterMove();
-
 
             // GESTIONE PASSI
             if (Mathf.Abs(asseZ) > 0 && isGround)
@@ -185,7 +164,6 @@ public class PlayerController : MonoBehaviour
         return (int)(1 + Mathf.Abs(vettore.z)) % 2;
     }
 
-
     void CharacterMove() {
 
         velocity.y += gravity * Time.deltaTime;
@@ -203,13 +181,11 @@ public class PlayerController : MonoBehaviour
         //Codice per l'ottenimento del guanto
         if (hit.gameObject.tag == "Gauntlet" && take == false)
         {
-            //GameController.instance.panels[0].SetActive(true);
             GameController.instance.PannelMessage(0, 0, true);
             GameController.instance.state = GameState.take;
             take = true;
         }
-
-        }
+    }
 
     private void OnCollisionExit(Collision hit)
     {
@@ -228,7 +204,7 @@ public class PlayerController : MonoBehaviour
     {
         if (hit.gameObject.tag == "Alien")
         {
-            this.transform.position = GameController.instance.checkPoints[GameController.instance.idlevel].position;
+            transform.position = GameController.instance.checkPoints[GameController.instance.idlevel].position;
         }
     }
 
@@ -240,7 +216,6 @@ public class PlayerController : MonoBehaviour
             Crystal.cr.crHeal();
         }
     }
-
 
     public void Key(int key)
     {
@@ -256,30 +231,9 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider hit)
     {
-
-        if (hit.gameObject.tag == "Collezzionabili")
-        {
-            hit.gameObject.GetComponent<BoxCollider>().enabled = false;
-
-            var Obj = hit.gameObject.GetComponent<CollectableScript>();
-
-            if (Obj.ID == 0)
-            {
-                Destroy(hit.gameObject);
-                GameController.instance.heal(Obj.maxhealth);
-            }
-            if (Obj.ID == 1)
-            {
-                Destroy(hit.gameObject);
-                GameController.instance.ammoUp(Obj.maxammo);
-            }
-        }
-
         if (hit.gameObject.tag == "Laser")
         {
             GameController.instance.TakeDemage(2);
-            
-
         }
 
         if (hit.gameObject.tag == "PulsantePorta")
@@ -313,24 +267,6 @@ public class PlayerController : MonoBehaviour
             Destroy(hit.gameObject);
         }
 
-        /*
-        //Codice per la raccolta dei medikit
-        if (hit.gameObject.tag == "Medikit")
-        {
-            Destroy(hit.gameObject);
-            print("Your Health was maxed out");
-            //GameController.instance.heal();
-        }
-
-        //Codice per la raccolta delle munizioni
-        if (hit.gameObject.tag == "Ammo")
-        {
-            Destroy(hit.gameObject);
-            print("You gained 1 ammo");
-            //GameController.instance.ammoUp();
-        }
-        */
-
         //Codice per la raccolta dei chip
         if (hit.gameObject.tag == "Chip")
         {
@@ -351,7 +287,6 @@ public class PlayerController : MonoBehaviour
                 //Player viene bloccato
 
                 CheckTp = true;
-                
             }
             else{
                 print("Ti serve il guanto per accedere all'area successiva");
@@ -368,7 +303,6 @@ public class PlayerController : MonoBehaviour
             hit.gameObject.GetComponent<BoxCollider>().enabled = false;
             Destroy(hit.gameObject);
         }
-
     }
 
     public void TpForSpaceship(float waitingTime)
