@@ -25,7 +25,7 @@ public class Crystal : MonoBehaviour
 
     public void crHeal()
     {
-        if(PlayerController.playercon.weaponEquipped && (timer > healTime) && (GameController.instance.currentStamina < 100))
+        if(PlayerController.playercon.weaponEquipped && (timer > healTime) && (GameController.instance.currentStamina < 100) && crystalHealth > 0)
         {
             crystalHealth--;
             GameController.instance.heal(healValue);

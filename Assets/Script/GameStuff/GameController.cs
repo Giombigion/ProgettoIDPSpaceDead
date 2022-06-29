@@ -44,6 +44,8 @@ public class GameController : MonoBehaviour
     [Range(0,15)]
     public float InteractiveOBJDistance;
 
+    public GameObject target;
+
     public void Awake()
     {
         instance = this;
@@ -135,14 +137,14 @@ public class GameController : MonoBehaviour
     //Metodo danno al player
     public void TakeDemage(int demageAmount)
     {
-        currentStamina -= demageAmount;
-        StaminaData.text = currentStamina.ToString();
-
-        if(currentStamina <= 0)
+        if(currentStamina > 0)
         {
-            PlayerController.playercon.transform.position = checkPoints[idlevel].transform.position;
-
-            Debug.Log("Sei morto!");
+            currentStamina -= demageAmount;
+            StaminaData.text = currentStamina.ToString();
+        }
+        else
+        {
+            state = GameState.dead;
         }
     }
 
@@ -189,6 +191,13 @@ public class GameController : MonoBehaviour
     //Metodo dedicato allo stato di DEAD
     public void _DEAD()
     {
+        target.transform.position = checkPoints[idlevel].position;
+        Debug.Log("Sei morto!");
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            state = GameState.play;
+        }
         //print("Sono in Dead");
     }
 
