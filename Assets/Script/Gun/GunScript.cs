@@ -9,7 +9,6 @@ public class GunScript : MonoBehaviour
     float asseX;
 
     //Variabili per la gestione dello sparo
-    [SerializeField] float maxTime = 0.5f;
     [SerializeField] Transform weaponRayPoint;
     [SerializeField] int length = 5;
     bool isFired = false;

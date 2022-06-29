@@ -131,11 +131,19 @@ public class GameController : MonoBehaviour
         currentStamina = Mathf.Clamp(currentStamina, 0, 100);
         StaminaData.text = currentStamina.ToString();
     }
+
     //Metodo danno al player
     public void TakeDemage(int demageAmount)
     {
         currentStamina -= demageAmount;
         StaminaData.text = currentStamina.ToString();
+
+        if(currentStamina <= 0)
+        {
+            PlayerController.playercon.transform.position = checkPoints[idlevel].transform.position;
+
+            Debug.Log("Sei morto!");
+        }
     }
 
     //Metodo che mostra a schermo i chip raccolti

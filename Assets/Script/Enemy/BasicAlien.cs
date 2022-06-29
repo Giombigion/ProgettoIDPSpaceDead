@@ -6,7 +6,6 @@ using UnityEngine.AI;
 public class BasicAlien : MonoBehaviour
 {
     [SerializeField] Transform target;
-    [SerializeField] float force;
 
     public NavMeshAgent agent;
 
@@ -26,6 +25,9 @@ public class BasicAlien : MonoBehaviour
     [SerializeField] float distanza;
 
     float timer;
+
+    public int EnemyDamage;
+    [SerializeField] float EnemyBackForce;
 
     void Start()
     {
@@ -132,7 +134,7 @@ public class BasicAlien : MonoBehaviour
     {
         agent.speed = 10;
         rotateTo(target.position, 4);
-        agent.SetDestination(target.position);     
+        agent.SetDestination(target.position);
     }
 
     bool isFrontOff(float visuale)
@@ -148,4 +150,15 @@ public class BasicAlien : MonoBehaviour
             return true;
         }
     }
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "Player")
+        {
+            GameController.instance.TakeDemage(EnemyDamage);
+            //collision.gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * EnemyBackForce, ForceMode.Impulse);
+        }
+    }
 }
+
+

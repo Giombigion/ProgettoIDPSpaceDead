@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+ public class PlayerController : MonoBehaviour
 {
     Animator otherAnimator; //Assegno un nome al componente Animator del guanto.
     CharacterController controller; //Assegno un nome al componente CharacterController.
@@ -200,14 +200,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void OnCollisionStay(Collision hit)
-    {
-        if (hit.gameObject.tag == "Alien")
-        {
-            transform.position = GameController.instance.checkPoints[GameController.instance.idlevel].position;
-        }
-    }
-
     public void OnTriggerStay(Collider hit)
     {
         if (hit.gameObject.tag == "Crystal")
@@ -301,7 +293,7 @@ public class PlayerController : MonoBehaviour
             print(checkcounter);
             GameController.instance.startspawnlevels[0].position = GameController.instance.checkPoints[checkcounter].position;
             hit.gameObject.GetComponent<BoxCollider>().enabled = false;
-            Destroy(hit.gameObject);
+            //Destroy(hit.gameObject);
         }
     }
 
