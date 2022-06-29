@@ -89,7 +89,7 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: af57220899fe7f942bcb29e993d89983, type: 3}
+    m_Motion: {fileID: 7400000, guid: 8ebb2d11d1f0f14498a54f181e9f3cc8, type: 2}
     m_Threshold: 0
     m_Position: {x: 0, y: 0.5}
     m_TimeScale: 1
@@ -97,7 +97,7 @@ BlendTree:
     m_DirectBlendParameter: Chase
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: ebe5b89bf3bbf1d4fb606899d6850a67, type: 3}
+    m_Motion: {fileID: 7400000, guid: a29cfc9389b3f3648a663cb1cbc6925b, type: 2}
     m_Threshold: 1
     m_Position: {x: 0, y: 1}
     m_TimeScale: 1
@@ -203,19 +203,19 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Melee
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Charge
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer

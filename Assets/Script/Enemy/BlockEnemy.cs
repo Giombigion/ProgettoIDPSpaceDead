@@ -4,26 +4,25 @@ using UnityEngine;
 
 public class BlockEnemy : MonoBehaviour
 {
+    public float StunTime;
+    float timer = 0;
     public static BlockEnemy block;
+    public bool isHit;
+    ParticleSystem emission;
 
     [SerializeField] BasicAlien _basicAlien;
 
-    public float StunTime;
-    float timer = 0;
-    public bool isHit;
-
-    ParticleSystem particles;
-
     private void Awake()
     {
+        emission = GetComponent<ParticleSystem>();
         block = this;
-        particles = GetComponent<ParticleSystem>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        particles.enableEmission = false;
+        var em = emission.emission;
+        em.enabled = false;
     }
 
     // Update is called once per frame
@@ -35,16 +34,24 @@ public class BlockEnemy : MonoBehaviour
 
     public void Stun()
     {
-        particles.enableEmission = true;
+        var em = emission.emission;
+        em.enabled = true;
+
         _basicAlien.agent.isStopped = true;
+
         timer += Time.deltaTime;
 
         if (timer > StunTime)
         {
+
             timer = 0;
+
             _basicAlien.agent.isStopped = false;
-            particles.enableEmission = false;
+
+            em.enabled = false;
+
             isHit = false;
+
         }
     }
 }
