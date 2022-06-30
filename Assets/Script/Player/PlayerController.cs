@@ -294,20 +294,6 @@ using UnityEngine;
             hit.gameObject.GetComponent<BoxCollider>().enabled = false;
             //Destroy(hit.gameObject);
         }
-
-        //Codici per i tutorial
-        if (hit.gameObject.tag == "ChipTutorial")
-        {
-            Destroy(hit.gameObject);
-            GameController.instance.tutorialType = 1;
-            GameController.instance.state = GameState.tutorial;
-        }
-        if (hit.gameObject.tag == "CrystalTutorial")
-        {
-            Destroy(hit.gameObject);
-            GameController.instance.tutorialType = 2;
-            GameController.instance.state = GameState.tutorial;
-        }
     }
 
     public void TpForSpaceship(float waitingTime)

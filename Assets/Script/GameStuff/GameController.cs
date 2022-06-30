@@ -46,8 +46,6 @@ public class GameController : MonoBehaviour
 
     public GameObject target;
 
-    public int tutorialType;
-
     public void Awake()
     {
         instance = this;
@@ -58,14 +56,10 @@ public class GameController : MonoBehaviour
     {
         initLevel(idlevel);
 
-
         //hidemouse();
-
 
         //Sceglie lo stato che permette di giocare
         state = GameState.play;
-
-        audioController.Play("Rain_Terra"); //Spostare in un metodo.
 
         //Disattiva all'avvio tutti i panel eccetto quello della stamina
         foreach (GameObject panel in panels)
@@ -213,67 +207,31 @@ public class GameController : MonoBehaviour
         {
             Destroy(gauntlet.gameObject);
 
-            audioController.audioSources[1].Stop();
-            audioController.Play("TestoGuanto");
+            //audioController.audioSources[1].Stop();
+            audioController.PlayMusic("TestoGuanto");
             state = GameState.tutorial;
         }
     }
 
     public void _TUTORIAL()
     {
-        if (tutorialType == 0)
+        PannelMessage(0, 1, true);
+
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
+            audioController.PlayMusic("EquipaggiamentoGuanto"); //QUI NON VA BENE QUESTO, PERCHE' VERRA' ESEGUITO OGNI VOLTA CHE SI ESCE DA UN PANNELLO. PERO' FUNZIONA SOLO SE MESSO QUI. DA CONTROLLARE
+            PannelMessage(0, 1, false);
 
-            PannelMessage(0, 1, true);
+            //Distrugge il collider;
+            Destroy(gauntlet2.GetComponent<BoxCollider>());
 
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                audioController.Play("EquipaggiamentoGuanto"); //QUI NON VA BENE QUESTO, PERCHE' VERRA' ESEGUITO OGNI VOLTA CHE SI ESCE DA UN PANNELLO. PERO' FUNZIONA SOLO SE MESSO QUI. DA CONTROLLARE
-                PannelMessage(0, 1, false);
+            gauntlet2.SetActive(true);
+            panels[1].SetActive(true);
+            panels[4].SetActive(true);
 
-                //Distrugge il collider;
-                Destroy(gauntlet2.GetComponent<BoxCollider>());
+            PlayerController.playercon.weaponEquipped = true;
 
-                gauntlet2.SetActive(true);
-                panels[1].SetActive(true);
-                panels[4].SetActive(true);
-
-                PlayerController.playercon.weaponEquipped = true;
-
-                state = GameState.play;
-            }
-        }
-        if (tutorialType == 1)
-        {
-
-            PannelMessage(0, 2, true);
-
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                PannelMessage(0, 2, false);
-
-                gauntlet2.SetActive(true);
-                panels[1].SetActive(true);
-                panels[4].SetActive(true);
-
-                state = GameState.play;
-            }
-        }
-        if (tutorialType == 2)
-        {
-
-            PannelMessage(0, 3, true);
-
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                PannelMessage(0, 3, false);
-
-                gauntlet2.SetActive(true);
-                panels[1].SetActive(true);
-                panels[4].SetActive(true);
-
-                state = GameState.play;
-            }
+            state = GameState.play;
         }
     }
 
