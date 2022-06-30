@@ -56,7 +56,9 @@ public class GameController : MonoBehaviour
     {
         initLevel(idlevel);
 
-        hidemouse();
+
+        //hidemouse();
+
 
         //Sceglie lo stato che permette di giocare
         state = GameState.play;
@@ -163,16 +165,8 @@ public class GameController : MonoBehaviour
 
     void hidemouse()
     {
-        if (isMouseShowed)
-        {
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
-        }
-        else
-        {
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-        }
     }
 
     //-----STATI DI GIOCO----------------------------------------------------------------------------------------
@@ -191,14 +185,17 @@ public class GameController : MonoBehaviour
     //Metodo dedicato allo stato di DEAD
     public void _DEAD()
     {
-        target.transform.position = checkPoints[idlevel].position;
-        Debug.Log("Sei morto!");
 
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            state = GameState.play;
-        }
+        Debug.Log("Sei morto!");
+        Invoke("RealDead", 0.1f);
+        //state = GameState.idle;
+
         //print("Sono in Dead");
+    }
+
+    void RealDead() {
+        target.transform.position = checkPoints[idlevel].position;
+        state = GameState.play;
     }
 
     //Metodo dedicato allo stato di PAUSE

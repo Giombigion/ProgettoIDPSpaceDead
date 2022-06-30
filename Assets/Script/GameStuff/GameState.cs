@@ -2,6 +2,7 @@
 public enum GameState
 {
     idle,
+    init,
     play,
     dead,
     pause,
