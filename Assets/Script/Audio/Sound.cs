@@ -1,94 +1,22 @@
 using UnityEngine.Audio;
 using UnityEngine;
 
-
+[System.Serializable]
 public class Sound
 {
-    [System.Serializable]
-    public class Music
-    {
-        public string name;
+    public string name;
 
-        public AudioClip clip;
+    public AudioClip clip;
 
-        [Range(0f, 1f)]
-        public float volume;
-        [Range(.1f, 3f)]
-        public float pitch;
+    [Range(0f, 1f)]
+    public float vloume;
+    [Range(.1f, 3f)]
+    public float pitch;
+    [Range(0f, 1f)]
+    public float spacialBlend;
 
-        public bool loop;
-        public bool playOnAwake;
-        public bool mute;
+    public bool loop;
 
-        public AudioMixerGroup output;
-
-        [HideInInspector]
-        public AudioSource source;
-    }
-
-    [System.Serializable]
-    public class SoundPlayer
-    {
-        public string name;
-
-        public AudioClip clip;
-
-        [Range(0f, 1f)]
-        public float volume;
-        [Range(.1f, 3f)]
-        public float pitch;
-
-        public bool loop;
-        public bool playOnAwake;
-        public bool mute;
-
-        public AudioMixerGroup output;
-
-        [HideInInspector]
-        public AudioSource source;
-    }
-
-    [System.Serializable]
-    public class SoundBckgroundSFX
-    {
-        public string name;
-
-        public AudioClip clip;
-
-        [Range(0f, 1f)]
-        public float volume;
-        [Range(.1f, 3f)]
-        public float pitch;
-
-        public bool loop;
-        public bool playOnAwake;
-        public bool mute;
-
-        public AudioMixerGroup output;
-
-        [HideInInspector]
-        public AudioSource source;
-    }
-
-    [System.Serializable]
-    public class SoundSFX
-    {
-        public string name;
-
-        public AudioClip clip;
-
-        [Range(0f, 1f)]
-        public float volume;
-        [Range(.1f, 3f)]
-        public float pitch;
-
-        public bool loop;
-        public bool playOnAwake;
-        public bool mute;
-
-        public AudioMixerGroup output;
-
-        [HideInInspector]
-        public AudioSource source;
-    }
+    [HideInInspector]
+    public AudioSource source;
 }
