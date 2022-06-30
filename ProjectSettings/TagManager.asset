@@ -18,6 +18,8 @@ TagManager:
   - Boss
   - Crystal
   - CheckPoint
+  - ChipTutorial
+  - CrystalTutorial
   layers:
   - Default
   - TransparentFX
