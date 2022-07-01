@@ -2,17 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioSourceMusic : MonoBehaviour
+public class AudioSourceScript : MonoBehaviour
 {
-    public static AudioSourceMusic instance;
-    public Sound.Music[] musics;
+    public static AudioSourceScript instance;
+    public Sound[] sounds;
 
     // Start is called before the first frame update
-    public void SetMusic(string name)
+    public void SetSound(string name)
     {
-        foreach (Sound.Music s in musics)
+        foreach (Sound s in sounds)
         {
-            if(s.name == name)
+            if (s.name == name)
             {
                 s.source = GetComponent<AudioSource>();
                 s.source.clip = s.clip;
