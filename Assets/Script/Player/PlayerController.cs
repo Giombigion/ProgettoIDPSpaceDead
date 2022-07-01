@@ -62,7 +62,7 @@ using UnityEngine;
     private void Start()
     {
         controller = GetComponent<CharacterController>();
-        audioController.audioSources[1].Play();
+        //audioController.audioSources[1].Play();
     }
  
    // Update is called once per frame
@@ -232,14 +232,14 @@ using UnityEngine;
         {
             if (GameController.instance.Keys[hit.gameObject.GetComponent<ScriptPulsantePorta>().ID])
             {
-                audioController.Play("PortaAperta");
+                //audioController.Play("PortaAperta");
                 hit.transform.gameObject.GetComponent<ScriptPulsantePorta>().animPort.Play("PortaAperta", -1, 0);
                 GameController.instance.Keys[hit.gameObject.GetComponent<ScriptPulsantePorta>().ID] = false;
                 Destroy(hit.gameObject.GetComponent<Collider>());
             }
             else
             {
-                audioController.Play("PortaChiusa");
+                //audioController.Play("PortaChiusa");
             }
         }
 
@@ -247,14 +247,14 @@ using UnityEngine;
         {
             hit.transform.gameObject.GetComponent<TriggerNaveSorvolo>().animShip01.Play("AstronaveSorvolo", -1, 0);
             hit.transform.gameObject.GetComponent<TriggerNaveSorvolo>().animShip02.Play("AstronaveSorvolo", -1, 0);
-            audioController.Play("SpaceshipFlyby");
+            //audioController.Play("SpaceshipFlyby");
 
             Destroy(hit.gameObject);
         }
 
         if (hit.gameObject.tag == "TriggerMotherSpaceshipSound")
         {
-            audioController.audioSources[0].Play();
+            //audioController.audioSources[0].Play();
 
             Destroy(hit.gameObject);
         }
@@ -274,8 +274,8 @@ using UnityEngine;
             {
                 GameController.instance.state = GameState.idle;
                 Teletrasporto.SetActive(true);
-                audioController.Play("Teletrasporto");
-                audioController.Stop("Rain_Terra");
+                //audioController.Play("Teletrasporto");
+                //audioController.Stop("Rain_Terra");
                 //Player viene bloccato
 
                 CheckTp = true;

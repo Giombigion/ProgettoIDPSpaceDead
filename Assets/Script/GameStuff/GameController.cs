@@ -19,9 +19,6 @@ public class GameController : MonoBehaviour
 
     [SerializeField] public int idlevel; //Variabile per l'assegnazione di un valore ad ogni livello
 
-    //Variabile per la gestione delle musiche
-    public GameObject[] music;
-
     //Variabile per la gestione dei livelli
     public GameObject[] levels;
 
@@ -63,7 +60,7 @@ public class GameController : MonoBehaviour
         //Sceglie lo stato che permette di giocare
         state = GameState.play;
 
-        audioController.Play("Rain_Terra"); //Spostare in un metodo.
+        //audioController.Play("Rain_Terra"); //Spostare in un metodo.
 
         //Disattiva all'avvio tutti i panel eccetto quello della stamina
         foreach (GameObject panel in panels)
@@ -211,8 +208,8 @@ public class GameController : MonoBehaviour
         {
             Destroy(gauntlet.gameObject);
 
-            audioController.audioSources[1].Stop();
-            audioController.Play("TestoGuanto");
+            //audioController.audioSources[1].Stop();
+            //audioController.Play("TestoGuanto");
             state = GameState.tutorial;
         }
     }
@@ -223,7 +220,7 @@ public class GameController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            audioController.Play("EquipaggiamentoGuanto"); //QUI NON VA BENE QUESTO, PERCHE' VERRA' ESEGUITO OGNI VOLTA CHE SI ESCE DA UN PANNELLO. PERO' FUNZIONA SOLO SE MESSO QUI. DA CONTROLLARE
+            //audioController.Play("EquipaggiamentoGuanto"); //QUI NON VA BENE QUESTO, PERCHE' VERRA' ESEGUITO OGNI VOLTA CHE SI ESCE DA UN PANNELLO. PERO' FUNZIONA SOLO SE MESSO QUI. DA CONTROLLARE
             PannelMessage(0, 1, false);
 
             //Distrugge il collider;
