@@ -124,6 +124,7 @@ public class GameController : MonoBehaviour
     //Metodo che riporta la stamina del player al massimo
     public void heal(int h)
     {
+        audioController.PlaySound(audioController.sourceSFX, "RicaricaVita");
         currentStamina += h;
         currentStamina = Mathf.Clamp(currentStamina, 0, 100);
         StaminaData.text = currentStamina.ToString();

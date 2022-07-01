@@ -43,6 +43,7 @@ public class GunScript : MonoBehaviour
         if (Input.GetButtonDown("Fire1") && PlayerController.playercon.weaponEquipped == true && isFired == false
             && GameController.instance.currentStamina > 5 && GameController.instance.gauntlet2.activeInHierarchy)
         {
+            AudioController.instance.PlaySound(AudioController.instance.sourceSFX, "ColpoArma");
             print("bullet fired");
             isFired = true;
         }
