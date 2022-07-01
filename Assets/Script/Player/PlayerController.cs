@@ -122,7 +122,7 @@ using UnityEngine;
             float sZarma = Vector3.Dot(movements, controller.transform.forward);
 
             //animator con BLEND TREE
-            otherAnimator.SetFloat("zArma", sZarma, 0.2f, Time.deltaTime);
+            //otherAnimator.SetFloat("zArma", sZarma, 0.2f, Time.deltaTime);
 
             Vector3 moveplayer = Vector3.forward * movements.z * speed * runSpeed + Vector3.right * movements.x * speedStrafe;
             moveplayer = transform.TransformDirection(moveplayer);

@@ -28,9 +28,10 @@ public class GunScript : MonoBehaviour
         Vector3 movements = new Vector3(asseX, 0, asseZ);
 
         float animSpeedZ = Vector3.Dot(movements, PlayerController.playercon.transform.forward);
+        float animSpeedX = Vector3.Dot(movements, PlayerController.playercon.transform.right);
 
         //animator con BLEND TREE
-        anim.SetFloat("xArma", animSpeedZ, 0.2f, Time.deltaTime);
+        anim.SetFloat("xArma", animSpeedX, 0.2f, Time.deltaTime);
         anim.SetFloat("zArma", animSpeedZ, 0.2f, Time.deltaTime);
     }
 
