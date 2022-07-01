@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GunScript : MonoBehaviour
 {
-    Animator anim; //Assegno un nome al componente Animator.
+    public Animator anim;
     float asseZ;
     float asseX;
 
@@ -44,6 +44,7 @@ public class GunScript : MonoBehaviour
             && GameController.instance.currentStamina > 5 && GameController.instance.gauntlet2.activeInHierarchy)
         {
             AudioController.instance.PlaySound(AudioController.instance.sourceSFX, "ColpoArma");
+            anim.Play("SparoGuanto", -1, 0);
             print("bullet fired");
             isFired = true;
         }
