@@ -226,6 +226,7 @@ using UnityEngine;
         Debug.Log("Chip");
     }
 
+    
     private void OnTriggerEnter(Collider hit)
     {
         if (hit.gameObject.tag == "Laser")
@@ -241,6 +242,7 @@ using UnityEngine;
                 hit.transform.gameObject.GetComponent<ScriptPulsantePorta>().animPort.Play("PortaAperta", -1, 0);
                 GameController.instance.Keys[hit.gameObject.GetComponent<ScriptPulsantePorta>().ID] = false;
                 Destroy(hit.gameObject.GetComponent<Collider>());
+                Destroy(GameController.instance.chipUI[chipCounter-1]);
             }
             else
             {
