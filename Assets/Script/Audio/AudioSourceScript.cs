@@ -18,6 +18,7 @@ public class AudioSourceScript : MonoBehaviour
                 s.source.clip = s.clip;
                 s.source.volume = s.volume;
                 s.source.pitch = s.pitch;
+                s.source.panStereo = s.pan;
                 s.source.loop = s.loop;
                 s.source.playOnAwake = s.playOnAwake;
                 s.source.mute = s.mute;

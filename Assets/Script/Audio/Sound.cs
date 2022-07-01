@@ -12,6 +12,8 @@ public class Sound
     public float volume;
     [Range(.1f, 3f)]
     public float pitch;
+    [Range(-1f, 1f)]
+    public float pan;
 
     public bool loop;
     public bool playOnAwake;
@@ -19,6 +21,5 @@ public class Sound
 
     public AudioMixerGroup output;
 
-    [HideInInspector]
     public AudioSource source;
 }

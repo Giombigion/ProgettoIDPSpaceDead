@@ -53,14 +53,10 @@ public class GameController : MonoBehaviour
     {
         initLevel(idlevel);
 
-
         //hidemouse();
-
 
         //Sceglie lo stato che permette di giocare
         state = GameState.play;
-
-        //audioController.Play("Rain_Terra"); //Spostare in un metodo.
 
         //Disattiva all'avvio tutti i panel eccetto quello della stamina
         foreach (GameObject panel in panels)
@@ -136,6 +132,7 @@ public class GameController : MonoBehaviour
     //Metodo danno al player
     public void TakeDemage(int demageAmount)
     {
+        audioController.PlaySound(audioController.sourcePlayer, "DannoPlayer");
         if(currentStamina > 0)
         {
             currentStamina -= demageAmount;

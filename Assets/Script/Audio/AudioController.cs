@@ -24,14 +24,11 @@ public class AudioController : MonoBehaviour
         if(GameController.instance.idlevel == 0)
         {
             PlaySound(sourceMusic, "Musica_Terra");
-
-            Debug.Log("Suono la musica della terra");
+            PlaySound(sourceBckgroundSFX, "Rain_Terra");
         }
         else if(GameController.instance.idlevel == 1)
         {
             StopSound(sourceMusic, "Musica_Nave");
-
-            Debug.Log("Suono la musica della nave");
         }
     }
 
@@ -67,7 +64,7 @@ public class AudioController : MonoBehaviour
         if (t > everyTIme)
         {
             t = 0;
-            //Play(audioname);
+            PlaySound(sourcePlayer ,audioname);
         }
     }
 }

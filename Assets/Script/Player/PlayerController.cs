@@ -135,12 +135,17 @@ using UnityEngine;
             {
                 if (PassoAlternato(moveplayer) > 0)
                 {
-                    audioController.AudioTimer(Random.Range(0.4f, 0.6f), "PassoSX");
+                    audioController.AudioTimer(Random.Range(0.5f, 0.7f), "PassoSX");
                 }
                 else
                 {
-                    audioController.AudioTimer(Random.Range(0.35f, 0.55f), "PassoDX");
+                    audioController.AudioTimer(Random.Range(0.55f, 0.75f), "PassoDX");
                 }
+            }
+
+            if (Jump)
+            {
+                audioController.PlaySound(audioController.sourcePlayer, "SaltoPlayer");
             }
         }
         else {
@@ -232,14 +237,14 @@ using UnityEngine;
         {
             if (GameController.instance.Keys[hit.gameObject.GetComponent<ScriptPulsantePorta>().ID])
             {
-                //audioController.Play("PortaAperta");
+                audioController.PlaySound(audioController.sourceSFX, "PortaAperta");
                 hit.transform.gameObject.GetComponent<ScriptPulsantePorta>().animPort.Play("PortaAperta", -1, 0);
                 GameController.instance.Keys[hit.gameObject.GetComponent<ScriptPulsantePorta>().ID] = false;
                 Destroy(hit.gameObject.GetComponent<Collider>());
             }
             else
             {
-                //audioController.Play("PortaChiusa");
+                audioController.PlaySound(audioController.sourceSFX, "PortaChiusa");
             }
         }
 
@@ -247,15 +252,14 @@ using UnityEngine;
         {
             hit.transform.gameObject.GetComponent<TriggerNaveSorvolo>().animShip01.Play("AstronaveSorvolo", -1, 0);
             hit.transform.gameObject.GetComponent<TriggerNaveSorvolo>().animShip02.Play("AstronaveSorvolo", -1, 0);
-            //audioController.Play("SpaceshipFlyby");
+            audioController.PlaySound(audioController.sourceSFX, "SorvoloNavette");
 
             Destroy(hit.gameObject);
         }
 
         if (hit.gameObject.tag == "TriggerMotherSpaceshipSound")
         {
-            //audioController.audioSources[0].Play();
-
+            audioController.PlaySound(audioController.sourceSFX, "BramNaveMadre");
             Destroy(hit.gameObject);
         }
 
@@ -274,8 +278,12 @@ using UnityEngine;
             {
                 GameController.instance.state = GameState.idle;
                 Teletrasporto.SetActive(true);
-                //audioController.Play("Teletrasporto");
-                //audioController.Stop("Rain_Terra");
+
+                //Imposta musica e suono del teletrasporto per il livello della nave
+                audioController.StopSound(audioController.sourceBckgroundSFX, "Rain_Terra");
+                audioController.PlaySound(audioController.sourceSFX, "Teletrasporto");
+                audioController.PlaySound(audioController.sourceMusic, "Musica_Nave");
+
                 //Player viene bloccato
 
                 CheckTp = true;
