@@ -268,6 +268,7 @@ using UnityEngine;
         //Codice per la raccolta dei chip
         if (hit.gameObject.tag == "Chip")
         {
+            audioController.PlaySound(audioController.sourceSFX, "RaccoltaChip");
             Key(hit.gameObject.GetComponent<ChipScript>().keyID);
 
             Destroy(hit.gameObject);
