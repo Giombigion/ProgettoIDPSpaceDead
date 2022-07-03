@@ -201,12 +201,12 @@ public class GameController : MonoBehaviour
     public void _TAKE()
     {
         //print("Sono in Take");
+        audioController.PlaySound(audioController.sourceSFX, "G.U.Ant-0_Voice");
 
         if (Input.GetKeyDown(KeyCode.E))
         {
             Destroy(gauntlet.gameObject);
-
-            //audioController.audioSources[1].Stop();
+            audioController.PlaySound(audioController.sourceSFX, "Testo_Guanto");
             //audioController.Play("TestoGuanto");
             state = GameState.tutorial;
         }
