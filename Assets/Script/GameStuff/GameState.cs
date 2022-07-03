@@ -7,5 +7,6 @@ public enum GameState
     dead,
     pause,
     take,
-    tutorial
+    tutorial,
+    menu
 }

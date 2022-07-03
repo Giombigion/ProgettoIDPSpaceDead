@@ -14,13 +14,12 @@ public class CutSceneController : MonoBehaviour
     [SerializeField] private PlayableDirector introCutscene = null;
     [SerializeField] public double skiptime = 50f;
 
-    [SerializeField] GameObject skipLine;
+    [SerializeField] public GameObject skipLine;
 
     // Start is called before the first frame update
     void Start()
     {
         controller = this;
-        cutscenes[0].SetActive(true);
     }
 
     // Update is called once per frame
@@ -35,6 +34,7 @@ public class CutSceneController : MonoBehaviour
         {
             introCutscene.time = skiptime;
             Destroy(skipLine);
+            GameController.instance.state = GameState.play;
         }
     }
 }

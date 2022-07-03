@@ -56,7 +56,7 @@ public class GameController : MonoBehaviour
         //hidemouse();
 
         //Sceglie lo stato che permette di giocare
-        state = GameState.play;
+        state = GameState.menu;
 
         //Disattiva all'avvio tutti i panel eccetto quello della stamina
         foreach (GameObject panel in panels)
@@ -165,6 +165,11 @@ public class GameController : MonoBehaviour
     }
 
     //-----STATI DI GIOCO----------------------------------------------------------------------------------------
+    public void _MENU()
+    {
+
+    }
+
     //Metodo dedicato allo stato di IDLE
     public void _IDLE()
     {
@@ -255,6 +260,9 @@ public class GameController : MonoBehaviour
                 break;
             case GameState.tutorial:
                 _TUTORIAL();
+                break;
+            case GameState.menu:
+                _MENU();
                 break;
         }
     }
