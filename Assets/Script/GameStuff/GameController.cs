@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour
     public static GameController instance;
 
     public AudioController audioController;
+    public MenuController menuController;
 
     public GameState state;
 
@@ -77,6 +78,12 @@ public class GameController : MonoBehaviour
     void Update()
     {
         StateMachine();
+
+        if (state == GameState.play && Input.GetKeyDown(KeyCode.Escape))
+        {
+            menuController.MenuPanels[0].SetActive(true);
+            state = GameState.menu;
+        }
     }
 
     /// <summary>

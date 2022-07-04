@@ -8,10 +8,12 @@ public class MenuController : MonoBehaviour
     public GameObject CameraCutscene;
     [SerializeField] GameObject menu;
 
-    [SerializeField] GameObject[] MenuPanels;
+    public GameObject[] MenuPanels;
 
     public static MenuController menuController;
     public bool skippable = false;
+
+    public GameObject Player;
 
     private void Start()
     {
@@ -41,9 +43,13 @@ public class MenuController : MonoBehaviour
 
     public void _CloseButton()
     {
-        foreach(GameObject panel in MenuPanels)
+        foreach (GameObject panel in MenuPanels)
         {
             panel.SetActive(false);
+            if (menu.activeInHierarchy == false)
+            {
+                GameController.instance.state = GameState.play;
+            }
         }
     }
 }
