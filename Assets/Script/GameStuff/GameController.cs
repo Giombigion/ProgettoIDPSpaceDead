@@ -229,7 +229,7 @@ public class GameController : MonoBehaviour
     {
         PannelMessage(0, 1, true);
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             //audioController.Play("EquipaggiamentoGuanto"); //QUI NON VA BENE QUESTO, PERCHE' VERRA' ESEGUITO OGNI VOLTA CHE SI ESCE DA UN PANNELLO. PERO' FUNZIONA SOLO SE MESSO QUI. DA CONTROLLARE
             PannelMessage(0, 1, false);
