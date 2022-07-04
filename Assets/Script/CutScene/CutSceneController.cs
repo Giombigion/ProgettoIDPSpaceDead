@@ -30,7 +30,7 @@ public class CutSceneController : MonoBehaviour
             GameController.instance.panels[2].SetActive(true);
         }
 
-        if (Input.GetKeyDown(key))
+        if (Input.GetKeyDown(key) && MenuController.menuController.skippable == true)
         {
             introCutscene.time = skiptime;
             Destroy(skipLine);
