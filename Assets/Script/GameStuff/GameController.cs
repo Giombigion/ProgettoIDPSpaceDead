@@ -202,6 +202,7 @@ public class GameController : MonoBehaviour
 
     void RealDead() {
         target.transform.position = checkPoints[idlevel].position;
+        currentStamina = 5;
         state = GameState.play;
     }
 
