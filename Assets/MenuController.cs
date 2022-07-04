@@ -7,7 +7,10 @@ public class MenuController : MonoBehaviour
 {
     public GameObject CameraCutscene;
     [SerializeField] GameObject menu;
+    [SerializeField] GameObject[] MenuPanels;
 
+
+    //----MAIN MENU----------------------------------------------------------------------------------------------------------------------------
     public void _StartButton()
     {
         CameraCutscene.GetComponent<PlayableDirector>().Play();
@@ -17,11 +20,21 @@ public class MenuController : MonoBehaviour
 
     public void _SettingsButton()
     {
-
+        MenuPanels[0].SetActive(true);
     }
 
     public void _ExitButton()
     {
 
+    }
+
+    //----SETTINGS PANEL----------------------------------------------------------------------------------------------------------------------------
+
+    public void _CloseButton()
+    {
+        foreach(GameObject panel in MenuPanels)
+        {
+            panel.SetActive(false);
+        }
     }
 }
