@@ -29,6 +29,10 @@ public class BasicAlien : MonoBehaviour
     public int EnemyDamage;
     [SerializeField] float EnemyBackForce;
 
+    float distanzaattacco;
+    float timerattacco;
+    public bool isAttacking;
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -73,6 +77,7 @@ public class BasicAlien : MonoBehaviour
                 }
                 else
                 {
+                    animazione.SetBool("MeleeAttack", false);
                     print("non ti vedo");
                     Patrol();
                 }
@@ -115,6 +120,7 @@ public class BasicAlien : MonoBehaviour
         agent.SetDestination(EnemyPaths.position);
     }
 
+    
     private Quaternion _rot;
     private Vector3 _direction;
     /// <summary>
@@ -135,6 +141,33 @@ public class BasicAlien : MonoBehaviour
         agent.speed = 10;
         rotateTo(target.position, 4);
         agent.SetDestination(target.position);
+        MeleeAttack();
+    }
+
+    void MeleeAttack()
+    {
+        distanzaattacco = Vector3.Distance(transform.position, target.transform.position);
+        
+        if (distanzaattacco < 2.5f) 
+        {
+            timerattacco += Time.deltaTime;                    
+            if (timerattacco > 2)
+            {
+                isAttacking = false;
+                timerattacco = 0;
+            }
+            else
+            {
+                isAttacking = true;
+            }
+            
+        }
+        else
+        {
+            isAttacking = false;
+        }
+
+        animazione.SetBool("MeleeAttack", isAttacking);
     }
 
     bool isFrontOff(float visuale)
