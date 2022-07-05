@@ -53,6 +53,9 @@ using UnityEngine;
     //Variabili per la gestione dei chip
     public int chipCounter = 0;
 
+    //Variabile per la gestione dei dialoghi
+    public int endDialogue;
+
     public void Awake()
     {
         playercon = this;
@@ -186,6 +189,7 @@ using UnityEngine;
         //Codice per l'ottenimento del guanto
         if (hit.gameObject.tag == "Gauntlet" && take == false)
         {
+            endDialogue = 2;
             GameController.instance.PannelMessage(0, 0, true, 1);
             GameController.instance.state = GameState.take;
             take = true;
@@ -209,6 +213,8 @@ using UnityEngine;
     {
         if (hit.gameObject.tag == "Crystal")
         {
+            endDialogue = 7;
+            GameController.instance.PannelMessage(5, NextDialogue.nd.seqNum + 1, true, 2);
             print(hit.gameObject.tag);
             Crystal.cr.crHeal();
         }
@@ -268,6 +274,10 @@ using UnityEngine;
         //Codice per la raccolta dei chip
         if (hit.gameObject.tag == "Chip")
         {
+            endDialogue = 6;
+
+            GameController.instance.PannelMessage(5, NextDialogue.nd.seqNum + 1, true, 2);
+
             audioController.PlaySound(audioController.sourceSFX, "RaccoltaChip");
             Key(hit.gameObject.GetComponent<ChipScript>().keyID);
 
@@ -313,12 +323,16 @@ using UnityEngine;
         t += Time.deltaTime;
         if (t > waitingTime) //Aspetta il tempo di esecuzione della clip audio
         {
+            endDialogue = 5;
+
             GetComponent<CharacterController>().enabled = false;
             GameController.instance.idlevel += 1;
             GameController.instance.initLevel(GameController.instance.idlevel);
             GetComponent<CharacterController>().enabled = true;
 
             CheckTp = false;
+
+            GameController.instance.PannelMessage(5, NextDialogue.nd.seqNum+1, true, 2);
         }
     }
 }
