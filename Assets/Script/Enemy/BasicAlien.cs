@@ -116,7 +116,7 @@ public class BasicAlien : MonoBehaviour
                 }
             }
         }
-        rotateTo(EnemyPaths.position, 4);
+        //rotateTo(EnemyPaths.position, 4);
         agent.SetDestination(EnemyPaths.position);
     }
 
@@ -128,18 +128,18 @@ public class BasicAlien : MonoBehaviour
     /// </summary>
     /// <param name="t">destinazione</param>
     /// <param name="speed"> velocità di rotazione</param>
-    void rotateTo(Vector3 t,float speed) 
+    /*void rotateTo(Vector3 t,float speed) 
     {
         _direction = (t - agent.transform.position).normalized;
         _rot = Quaternion.LookRotation(_direction);
         agent.transform.rotation = Quaternion.Slerp(agent.transform.rotation, _rot, Time.deltaTime * speed);
-    }
+    }*/
 
     //Codice per l'attacco dei Nemici
     void Attack()
     {
         agent.speed = 5;
-        rotateTo(target.position, 4);
+        //rotateTo(target.position, 4);
         agent.SetDestination(target.position);
         MeleeAttack();
     }
