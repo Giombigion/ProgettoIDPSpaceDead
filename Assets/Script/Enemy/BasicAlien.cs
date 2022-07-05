@@ -138,7 +138,7 @@ public class BasicAlien : MonoBehaviour
     //Codice per l'attacco dei Nemici
     void Attack()
     {
-        agent.speed = 10;
+        agent.speed = 5;
         rotateTo(target.position, 4);
         agent.SetDestination(target.position);
         MeleeAttack();
