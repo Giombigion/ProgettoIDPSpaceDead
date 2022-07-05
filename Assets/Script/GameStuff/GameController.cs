@@ -39,6 +39,8 @@ public class GameController : MonoBehaviour
     [SerializeField] GameObject gauntlet;
     [SerializeField] public GameObject gauntlet2;
 
+    [SerializeField] GameObject Nemici; 
+
     [Range(0,15)]
     public float InteractiveOBJDistance;
 
@@ -83,6 +85,11 @@ public class GameController : MonoBehaviour
         {
             menuController.MenuPanels[0].SetActive(true);
             state = GameState.menu;
+        }
+
+        if (currentStamina < 0)
+        {
+            state = GameState.dead;
         }
     }
 
@@ -141,15 +148,8 @@ public class GameController : MonoBehaviour
     public void TakeDemage(int demageAmount)
     {
         audioController.PlaySound(audioController.sourcePlayer, "DannoPlayer");
-        if(currentStamina > 0)
-        {
-            currentStamina -= demageAmount;
-            StaminaData.text = currentStamina.ToString();
-        }
-        else
-        {
-            state = GameState.dead;
-        }
+        currentStamina -= demageAmount;
+        StaminaData.text = currentStamina.ToString();
     }
 
     //Metodo che mostra a schermo i chip raccolti
@@ -174,36 +174,36 @@ public class GameController : MonoBehaviour
     //-----STATI DI GIOCO----------------------------------------------------------------------------------------
     public void _MENU()
     {
-
+        panels[4].SetActive(false);
     }
 
     //Metodo dedicato allo stato di IDLE
     public void _IDLE()
     {
-        //print("Sono in Idle");
+
     }
 
     //Metodo dedicato allo stato di PLAY
     public void _PLAY()
     {
-        //print("Sono in Play");
+        Nemici.SetActive(true);
+        panels[4].SetActive(true);
     }
 
     //Metodo dedicato allo stato di DEAD
     public void _DEAD()
     {
-
+        Nemici.SetActive(false);
+        state = GameState.menu;
         Debug.Log("Sei morto!");
         Invoke("RealDead", 0.1f);
-        //state = GameState.idle;
-
-        //print("Sono in Dead");
     }
 
-    void RealDead() {
+    void RealDead() 
+    {
         target.transform.position = checkPoints[idlevel].position;
         currentStamina = 5;
-        state = GameState.play;
+        panels[6].SetActive(true);
     }
 
     //Metodo dedicato allo stato di PAUSE
