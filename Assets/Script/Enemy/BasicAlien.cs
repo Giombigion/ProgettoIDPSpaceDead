@@ -193,5 +193,3 @@ public class BasicAlien : MonoBehaviour
         }
     }
 }
-
-

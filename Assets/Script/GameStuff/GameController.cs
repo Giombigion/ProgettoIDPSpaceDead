@@ -98,18 +98,35 @@ public class GameController : MonoBehaviour
     /// </summary>
     /// <param name="p">Indice del pannello</param>
     /// <param name="element">Elementi nel pannello</param>
-    public void PannelMessage(int p, int element, bool active)
+    public void PannelMessage(int p, int element, bool active, int type)
     {
         panels[p].SetActive(active);
-        panels[p].transform.GetChild(0).GetComponent<Text>().text = _testi.data[element].titolo;
 
-        try
+        if (type == 1)
         {
-            panels[p].transform.GetChild(1).GetComponent<Text>().text = _testi.data[element].testo;
+            panels[p].transform.GetChild(0).GetComponent<Text>().text = _testi.data[element].titolo;
+
+            try
+            {
+                panels[p].transform.GetChild(1).GetComponent<Text>().text = _testi.data[element].testo;
+            }
+            catch
+            {
+                print("Non esiste l'elemento per il testo");
+            }
         }
-        catch
+        if (type == 2)
         {
-            print("Non esiste l'elemento per il testo");
+            panels[p].transform.GetChild(0).GetComponent<Text>().text = _testi.dialoghi[element].narratore;
+
+            try
+            {
+                panels[p].transform.GetChild(1).GetComponent<Text>().text = _testi.dialoghi[element].dialogo;
+            }
+            catch
+            {
+                print("Non esiste l'elemento per il testo");
+            }
         }
     }
 
@@ -221,18 +238,19 @@ public class GameController : MonoBehaviour
             Destroy(gauntlet.gameObject);
             audioController.PlaySound(audioController.sourceSFX, "Testo_Guanto");
             //audioController.Play("TestoGuanto");
+            PannelMessage(0, 0, false, 1);
             state = GameState.tutorial;
         }
     }
 
     public void _TUTORIAL()
     {
-        PannelMessage(0, 1, true);
+        PannelMessage(5, 0, true, 2);
 
-        if (Input.GetKeyDown(KeyCode.E))
-        {
+        /*if (Input.GetKeyDown(KeyCode.E))
+        {*/
             //audioController.Play("EquipaggiamentoGuanto"); //QUI NON VA BENE QUESTO, PERCHE' VERRA' ESEGUITO OGNI VOLTA CHE SI ESCE DA UN PANNELLO. PERO' FUNZIONA SOLO SE MESSO QUI. DA CONTROLLARE
-            PannelMessage(0, 1, false);
+            //PannelMessage(0, 1, false);
 
             //Distrugge il collider;
             Destroy(gauntlet2.GetComponent<BoxCollider>());
@@ -244,7 +262,7 @@ public class GameController : MonoBehaviour
             PlayerController.playercon.weaponEquipped = true;
 
             state = GameState.play;
-        }
+        /*}*/
     }
 
     void StateMachine()
