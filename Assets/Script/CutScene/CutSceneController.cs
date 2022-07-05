@@ -16,6 +16,8 @@ public class CutSceneController : MonoBehaviour
 
     [SerializeField] public GameObject skipLine;
 
+    public GameObject testiIntro;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +35,7 @@ public class CutSceneController : MonoBehaviour
         if (Input.GetKeyDown(key) && MenuController.menuController.skippable == true)
         {
             introCutscene.time = skiptime;
+            Destroy(testiIntro);
             Destroy(skipLine);
             GameController.instance.state = GameState.play;
         }
