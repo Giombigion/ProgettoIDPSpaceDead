@@ -235,6 +235,11 @@ using UnityEngine;
     
     private void OnTriggerEnter(Collider hit)
     {
+        if (hit.gameObject.tag == "BossZone")
+        {
+            Boss_Controller.BossInstance.bossState = BossState.normalAttack;
+        }
+
         if (hit.gameObject.tag == "Laser")
         {
             GameController.instance.TakeDemage(2);
