@@ -70,6 +70,7 @@ public class GameController : MonoBehaviour
             PannelMessage(5, 0, true, 2);
             gauntlet2.SetActive(true);
             panels[1].SetActive(true);
+            panels[2].SetActive(true);
             panels[4].SetActive(true);
             PlayerController.playercon.weaponEquipped = true;
         }
@@ -264,6 +265,7 @@ public class GameController : MonoBehaviour
 
             gauntlet2.SetActive(true);
             panels[1].SetActive(true);
+            panels[2].SetActive(true);
             panels[4].SetActive(true);
 
             PlayerController.playercon.weaponEquipped = true;
