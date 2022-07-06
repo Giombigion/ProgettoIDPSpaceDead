@@ -169,6 +169,7 @@ public class BasicAlien : MonoBehaviour
             isAttacking = false;
         }
 
+        AudioController.instance.PlaySound(AudioController.instance.sourceSFX, "Nemico_Attacco");
         animazione.SetBool("MeleeAttack", isAttacking);
     }
 

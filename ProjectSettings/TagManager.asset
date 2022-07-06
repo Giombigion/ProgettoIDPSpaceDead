@@ -21,6 +21,7 @@ TagManager:
   - BossZone
   - LabTrigger
   - BossTrigger
+  - EndGame
   layers:
   - Default
   - TransparentFX

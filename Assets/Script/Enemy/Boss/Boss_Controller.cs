@@ -24,7 +24,7 @@ public class Boss_Controller : MonoBehaviour
     private void Awake()
     {
         BossInstance = this;
-        meshAgentBoss = GetComponent<NavMeshAgent>();
+        //meshAgentBoss = GetComponent<NavMeshAgent>();
         animatorBoss = GetComponent<Animator>();
     }
     private void Start()
@@ -36,8 +36,8 @@ public class Boss_Controller : MonoBehaviour
     {
         BossStateMachine();
 
-        var changeAnim = Vector3.Dot(meshAgentBoss.transform.forward, meshAgentBoss.velocity);
-        animatorBoss.SetFloat("Chase", changeAnim, 0.16f, Time.deltaTime);
+        //var changeAnim = Vector3.Dot(meshAgentBoss.transform.forward, meshAgentBoss.velocity);
+        //animatorBoss.SetFloat("Chase", changeAnim, 0.16f, Time.deltaTime);
     }
 
     //----STATI DEL BOSS---------------------------------------------------------------------------------------------
@@ -48,9 +48,9 @@ public class Boss_Controller : MonoBehaviour
 
     public void _normalAttack()
     {
-        meshAgentBoss.speed = 5;
-        meshAgentBoss.SetDestination(bossTargert.transform.position);
-        BossAttack();
+        //meshAgentBoss.speed = 5;
+        //meshAgentBoss.SetDestination(bossTargert.transform.position);
+        //BossAttack();
     }
 
     public void _chargeAttack()

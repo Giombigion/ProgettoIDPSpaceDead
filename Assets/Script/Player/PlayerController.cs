@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
- public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     Animator otherAnimator; //Assegno un nome al componente Animator del guanto.
     CharacterController controller; //Assegno un nome al componente CharacterController.
@@ -50,6 +51,8 @@ using UnityEngine;
     bool CheckTp;
     [SerializeField] GunScript _gunScript;
 
+    public GameObject cameraEndLevel;
+
     //Variabili per la gestione dei chip
     public int chipCounter = 0;
 
@@ -83,7 +86,7 @@ using UnityEngine;
             //RUN
             if (run)
             {
-                runSpeed = 2;
+                runSpeed = 1;
             }
             else
             {
@@ -335,6 +338,15 @@ using UnityEngine;
             GameController.instance.startspawnlevels[0].position = GameController.instance.checkPoints[checkcounter].position;
             hit.gameObject.GetComponent<BoxCollider>().enabled = false;
             //Destroy(hit.gameObject);
+        }
+
+        if(hit.gameObject.tag == "EndGame")
+        {
+            cameraEndLevel.GetComponent<PlayableDirector>().Play();
+            GameController.instance.state = GameState.idle;
+            GameController.instance.panels[1].SetActive(false);
+            GameController.instance.panels[2].SetActive(false);
+            GameController.instance.panels[4].SetActive(false);
         }
     }
 
