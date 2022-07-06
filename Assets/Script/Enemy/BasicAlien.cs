@@ -25,6 +25,8 @@ public class BasicAlien : MonoBehaviour
     [SerializeField] float distanza;
 
     float timer;
+    public float damageTimer;
+    public float waitDmg = 10f;
 
     public int EnemyDamage;
     [SerializeField] float EnemyBackForce;
@@ -39,11 +41,11 @@ public class BasicAlien : MonoBehaviour
         animazione = GetComponent<Animator>();
     }
 
-    
     void Update()
     {
         if (GameController.instance.state == GameState.play)
         {
+            damageTimer += Time.deltaTime;
             //Spheracast per il controllo della distanza tra il nemico e i vari oggetti
             RaycastHit hit;
             if (Physics.SphereCast(raypointfront.position, 1, transform.forward, out hit, lengthsphere))
@@ -188,7 +190,11 @@ public class BasicAlien : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            GameController.instance.TakeDemage(EnemyDamage);
+            if (damageTimer > waitDmg)
+            {
+                GameController.instance.TakeDemage(EnemyDamage);
+                damageTimer = 0;
+            }
             //collision.gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * EnemyBackForce, ForceMode.Impulse);
         }
     }
