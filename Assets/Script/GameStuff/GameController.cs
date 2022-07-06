@@ -56,8 +56,6 @@ public class GameController : MonoBehaviour
     {
         initLevel(idlevel);
 
-        //hidemouse();
-
         //Sceglie lo stato che permette di giocare
         state = GameState.menu;
 
@@ -86,6 +84,7 @@ public class GameController : MonoBehaviour
         {
             menuController.MenuPanels[0].SetActive(true);
             state = GameState.menu;
+            showmouse();
         }
 
         if (currentStamina < 0)
@@ -183,10 +182,16 @@ public class GameController : MonoBehaviour
         chipUI[chipCounter].SetActive(true);
     }
 
-    void hidemouse()
+    public void hidemouse()
     {
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    public void showmouse()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     //-----STATI DI GIOCO----------------------------------------------------------------------------------------

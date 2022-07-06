@@ -27,6 +27,7 @@ public class MenuController : MonoBehaviour
         CutSceneController.controller.skipLine.SetActive(true);
         skippable = true;
         menu.SetActive(false);
+        GameController.instance.hidemouse();
     }
 
     public void _SettingsButton()
@@ -49,6 +50,7 @@ public class MenuController : MonoBehaviour
             if (menu.activeInHierarchy == false)
             {
                 GameController.instance.state = GameState.play;
+                GameController.instance.hidemouse();
             }
         }
     }
