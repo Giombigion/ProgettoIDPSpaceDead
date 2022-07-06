@@ -211,7 +211,6 @@ public class GameController : MonoBehaviour
     public void _PLAY()
     {
         Nemici.SetActive(true);
-        panels[4].SetActive(true);
     }
 
     //Metodo dedicato allo stato di DEAD
