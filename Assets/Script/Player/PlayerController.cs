@@ -229,7 +229,6 @@ using UnityEngine;
         GameController.instance.Keys[key] = true;
         Debug.Log("Chip");
     }
-
     
     private void OnTriggerEnter(Collider hit)
     {
@@ -240,8 +239,20 @@ using UnityEngine;
 
         if(hit.gameObject.tag == "Crystal")
         {
-            endDialogue = 7;
-            GameController.instance.PannelMessage(5, NextDialogue.nd.seqNum, true, 2);
+            endDialogue = 10;
+            GameController.instance.PannelMessage(5, NextDialogue.nd.seqNum-1, true, 2);
+        }
+
+        if (hit.gameObject.tag == "LabTrigger")
+        {
+            endDialogue = 14;
+            GameController.instance.PannelMessage(5, NextDialogue.nd.seqNum - 1, true, 2);
+        }
+
+        if (hit.gameObject.tag == "BossTrigger")
+        {
+            endDialogue = 15;
+            GameController.instance.PannelMessage(5, NextDialogue.nd.seqNum - 1, true, 2);
         }
 
         if (hit.gameObject.tag == "Laser")
