@@ -37,7 +37,7 @@ public class MenuController : MonoBehaviour
 
     public void _ExitButton()
     {
-
+        Application.Quit();
     }
 
     //----SETTINGS PANEL----------------------------------------------------------------------------------------------------------------------------

@@ -12,6 +12,7 @@ public class CutSceneController : MonoBehaviour
     public KeyCode key;
 
     [SerializeField] private PlayableDirector introCutscene = null;
+    [SerializeField] private PlayableDirector endCutscene = null;
     [SerializeField] public double skiptime = 50f;
 
     [SerializeField] public GameObject skipLine;
@@ -33,6 +34,11 @@ public class CutSceneController : MonoBehaviour
             Destroy(testiIntro);
             Destroy(skipLine);
             GameController.instance.state = GameState.play;
+        }
+
+        if(endCutscene.time == 842)
+        {
+            Application.Quit();
         }
     }
 }
