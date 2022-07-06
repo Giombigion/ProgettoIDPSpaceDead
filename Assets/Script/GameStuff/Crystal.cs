@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Crystal : MonoBehaviour
 {
-    public int crystalHealth;
-    public float healTime;
-    public int healValue;
+    [SerializeField] int crystalHealth;
+    [SerializeField] float healTime;
+    [SerializeField] int healValue;
     float timer;
 
     public static Crystal cr;
