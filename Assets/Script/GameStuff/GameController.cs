@@ -198,7 +198,7 @@ public class GameController : MonoBehaviour
     //-----STATI DI GIOCO----------------------------------------------------------------------------------------
     public void _MENU()
     {
-        panels[4].SetActive(false);
+
     }
 
     //Metodo dedicato allo stato di IDLE
