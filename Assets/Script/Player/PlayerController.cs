@@ -54,7 +54,7 @@ using UnityEngine;
     public int chipCounter = 0;
 
     //Variabile per la gestione dei dialoghi
-    public int endDialogue;
+    public int endDialogue = 5;
 
     public void Awake()
     {
@@ -213,8 +213,6 @@ using UnityEngine;
     {
         if (hit.gameObject.tag == "Crystal")
         {
-            endDialogue = 7;
-            GameController.instance.PannelMessage(5, NextDialogue.nd.seqNum + 1, true, 2);
             print(hit.gameObject.tag);
             Crystal.cr.crHeal();
         }
@@ -238,6 +236,12 @@ using UnityEngine;
         if (hit.gameObject.tag == "BossZone")
         {
             Boss_Controller.BossInstance.bossState = BossState.normalAttack;
+        }
+
+        if(hit.gameObject.tag == "Crystal")
+        {
+            endDialogue = 7;
+            GameController.instance.PannelMessage(5, NextDialogue.nd.seqNum, true, 2);
         }
 
         if (hit.gameObject.tag == "Laser")
@@ -281,7 +285,7 @@ using UnityEngine;
         {
             endDialogue = 6;
 
-            GameController.instance.PannelMessage(5, NextDialogue.nd.seqNum + 1, true, 2);
+            GameController.instance.PannelMessage(5, NextDialogue.nd.seqNum, true, 2);
 
             audioController.PlaySound(audioController.sourceSFX, "RaccoltaChip");
             Key(hit.gameObject.GetComponent<ChipScript>().keyID);
@@ -337,7 +341,7 @@ using UnityEngine;
 
             CheckTp = false;
 
-            GameController.instance.PannelMessage(5, NextDialogue.nd.seqNum+1, true, 2);
+            GameController.instance.PannelMessage(5, NextDialogue.nd.seqNum, true, 2);
         }
     }
 }

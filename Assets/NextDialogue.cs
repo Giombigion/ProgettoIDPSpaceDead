@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class NextDialogue : MonoBehaviour
 {
-    float timer = 0f;
+    public float timer = 0f;
     public float waitTime;
     public int seqNum = 1;
 
@@ -24,19 +24,21 @@ public class NextDialogue : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
+        timer += Time.deltaTime; //conta il tempo trascorso dall'ultima interazione
         
-        if(timer > waitTime)
+        if(timer > waitTime) //controlla se è passato il tempo richiesto
         {
-            if (seqNum <= PlayerController.playercon.endDialogue)
+            if (seqNum <= PlayerController.playercon.endDialogue) //controlla se ci sono dialoghi disponibili
             {
-                GameController.instance.PannelMessage(5, seqNum, true, 2);
-                seqNum++;
-                timer = 0;
+                GameController.instance.PannelMessage(5, seqNum, true, 2); //attiva il primo dialogo della serie
+                print("Ho aperto il dialogo numero " + seqNum);
+                seqNum++; //prepara le variabili per il prossimo ciclo
+                print("Preparo il dialogo numero " + seqNum);
+                timer = 0; //azzera il timer
             }
             else
             {
-                GameController.instance.PannelMessage(5, 0, false, 2);
+                GameController.instance.PannelMessage(5, 0, false, 2); //disattiva il pannello
             }
         }
     }

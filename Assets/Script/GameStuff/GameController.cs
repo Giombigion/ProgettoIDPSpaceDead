@@ -67,8 +67,9 @@ public class GameController : MonoBehaviour
             panel.SetActive(false);
         }
 
-        if (idlevel != 0)
+        if (idlevel == 1)
         {
+            PannelMessage(5, 0, true, 2);
             gauntlet2.SetActive(true);
             panels[1].SetActive(true);
             panels[4].SetActive(true);
