@@ -227,6 +227,7 @@ public class GameController : MonoBehaviour
         target.transform.position = checkPoints[idlevel].position;
         currentStamina = 5;
         panels[6].SetActive(true);
+        showmouse();
     }
 
     //Metodo dedicato allo stato di PAUSE

@@ -8,5 +8,6 @@ public class DeadPanel : MonoBehaviour
     {
         GameController.instance.state = GameState.play;
         GameController.instance.panels[6].SetActive(false);
+        GameController.instance.hidemouse();
     }
 }
